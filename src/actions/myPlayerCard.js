@@ -24,7 +24,7 @@ export const addPlayerCard = (playercard) => {
 
 export const getMyPlayerCard = (playercard) => {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/player_card`, {
+        return fetch(`http://localhost:3000/api/v1/playercard`, {
             credentials: "include",
             method: "GET",
             headers: {
@@ -54,7 +54,7 @@ export const createPlayerCard = (playerCardData, history) => {
                 user_id: window.location.pathname.split('/')[2]
             }
         }
-        return fetch(`http://localhost:3000/api/v1/player_card`, {
+        return fetch(`http://localhost:3000/api/v1/playercard`, {
             credentials: "include",
             method: "POST",
             headers: {
@@ -92,7 +92,7 @@ export const updatePlayerCard = (playerCardData, history) => {
                 user_id: playerCardData.userId
             }
         }
-        return fetch(`http://localhost:3000/api/v1/player_card/${playerCardData.userId}`, {
+        return fetch(`http://localhost:3000/api/v1/playercard/${playerCardData.userId}`, {
             credentials: "include",
             method: "PATCH",
             headers: {
