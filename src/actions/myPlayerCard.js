@@ -51,7 +51,7 @@ export const createPlayerCard = (playerCardData, history) => {
                 player_weight: playerCardData.playerWeight,
                 player_age: playerCardData.playerAge,
                 player_fav_player: playerCardData.playerFavPlayer,
-                user_id: window.location.pathname.split('/')[2]
+                // user_id: window.location.pathname.split('/')[2]
             }
         }
         return fetch(`http://localhost:3000/api/v1/playercard`, {

@@ -9,7 +9,7 @@ const PlayerCardContainer = ({currentUser}) => {
    
   return (
     <Container>
-      <h1>{currentUser.attributes.username}'s Player Card </h1>
+      <h1>{currentUser.username}'s Player Card </h1>
       <PlayerCard/>
     </Container>
   )

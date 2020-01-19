@@ -5,7 +5,7 @@ import { getMyPlayerCard } from './myPlayerCard.js'
 export const setCurrentUser = (user) => {
     return {
         type: "SET_CURRENT_USER",
-        payload: user
+        user
     }
 }
 
@@ -15,9 +15,15 @@ export const clearCurrentUser = () => {
     }
 }
 
+export const addUser = user => {
+    return {
+      type: "ADD_USER",
+      user
+    }
+  }
+
 export const login = (credentials, history) => {
-    console.log("credentials:",credentials)
-    
+
     return dispatch => {
         return fetch('http://localhost:3000/api/v1/login', {
             credentials: "include",
@@ -31,7 +37,8 @@ export const login = (credentials, history) => {
         if(user.error) {
             alert(user.error)
         } else {
-            dispatch(setCurrentUser(user.data))
+            //debugger
+            dispatch(setCurrentUser(user))
             dispatch(getMyPlayerCard())
             dispatch(resetLoginForm())
             history.push(`/user/${user.data.id}`)
@@ -87,8 +94,9 @@ export const signup = (credentials, history) => {
                if(user.error) {
                  alert(user.error)
                } else {
-                dispatch(setCurrentUser(user.data))
+                dispatch(setCurrentUser(signup))
                 dispatch(resetSignupForm())
+                dispatch(addUser(signup))
                 history.push(`/user/${user.data.id}`)
             }
          }).catch(console.log)

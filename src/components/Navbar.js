@@ -9,7 +9,7 @@ import PlayerCardContainer from '../containers/PlayerCardContainer.js'
     return (
     
        <div className="NavBar">
-       <h3 className="navlink">Welcome {currentUser.attributes.username}</h3>
+       <h3 className="navlink">Welcome {currentUser.username}</h3>
             
             <Route  component ={PlayerCardContainer}/>
             {!!currentUser ? <Logout/> : null}
@@ -17,9 +17,9 @@ import PlayerCardContainer from '../containers/PlayerCardContainer.js'
     )
 }
 
-const mapStateToProps = ({currentUser}) => {
+const mapStateToProps = (state) => {
     return ({
-      currentUser
+      currentUser: state.currentUser
     })
   }
   

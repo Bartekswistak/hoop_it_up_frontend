@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateLoginForm} from '../actions/loginForm.js'
+import {resetLoginForm} from "../actions/loginForm"
 import {login} from '../actions/currentUser.js'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 
- const Login = ({loginFormData, updateLoginForm, login, history}) => {
+ const Login = ({loginFormData, updateLoginForm, login,resetLoginForm, history}) => {
 
     const handleChange = event => {
         const {name, value} = event.target
@@ -19,6 +20,7 @@ import Container from 'react-bootstrap/Container';
     const handleSubmit = event => {
         event.preventDefault()
         login(loginFormData, history)
+        resetLoginForm()
     }
 
     return (
@@ -51,4 +53,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {updateLoginForm, login})(Login)
+export default connect(mapStateToProps, {updateLoginForm, login, resetLoginForm})(Login)
