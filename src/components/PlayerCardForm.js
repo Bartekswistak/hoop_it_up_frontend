@@ -4,6 +4,7 @@ import { createPlayerCard } from '../actions/myPlayerCard.js'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { withRouter } from 'react-router-dom';
+import currentUser from '../reducers/currentUser.js';
 
 class PlayerCardForm extends React.Component {
 
@@ -24,9 +25,9 @@ class PlayerCardForm extends React.Component {
 
   handleSubmit = (event)=> {
     event.preventDefault()
-    let userId = this.props.location.pathname.split('/')[2]
+    let userId = "myuserid"
     this.props.createPlayerCard(this.state, userId)
-    this.props.history.push(`/player_card/${userId}`)
+    debugger
     this.setState({
       playerNickname: "",
       playerHeightFeet: "",

@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {updateSignupForm} from '../actions/signupForm.js'
+import {resetSignupForm} from "../actions/signupForm"
 import {signup} from '../actions/currentUser.js'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 
-const Signup = ({signupFormData, updateSignupForm, signup, history}) => {
+const Signup = ({signupFormData, updateSignupForm, signup, resetSignupForm, history}) => {
 
   const handleChange = event => {
       const {name, value} = event.target
@@ -19,6 +20,7 @@ const Signup = ({signupFormData, updateSignupForm, signup, history}) => {
   const handleSubmit = event => {
       event.preventDefault()
       signup(signupFormData, history)
+      resetSignupForm()
   }
 
   return (
@@ -58,4 +60,4 @@ const Signup = ({signupFormData, updateSignupForm, signup, history}) => {
 }
 
 
-export default connect(mapStateToProps, {updateSignupForm, signup})(Signup)
+export default connect(mapStateToProps, {updateSignupForm, resetSignupForm, signup})(Signup)

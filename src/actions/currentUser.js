@@ -41,7 +41,7 @@ export const login = (credentials, history) => {
             dispatch(setCurrentUser(user))
             dispatch(getMyPlayerCard())
             dispatch(resetLoginForm())
-            history.push(`/user/${user.data.id}`)
+            history.push(`/user/${user.id}`)
         }
     }).catch(console.log)
   }
@@ -94,10 +94,10 @@ export const signup = (credentials, history) => {
                if(user.error) {
                  alert(user.error)
                } else {
-                dispatch(setCurrentUser(signup))
+                dispatch(setCurrentUser(user))
                 dispatch(resetSignupForm())
                 dispatch(addUser(signup))
-                history.push(`/user/${user.data.id}`)
+                history.push(`/user/${user.id}`)
             }
          }).catch(console.log)
     }

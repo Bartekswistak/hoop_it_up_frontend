@@ -12,28 +12,6 @@ class MyPlayerCard extends React.Component {
     // }
 
 
-//     componentDidMount() {
-//      let votes = {}
-//         this.props.myEntries.map((entry) => {
-//             votes[entry.id] = 0
-//         })
-//         this.setState({
-//             votes: votes
-//         })
-//     }
-
-//   componentDidUpdate(prevProps) {
-//     let votes = {}
-//         if (prevProps !== this.props) {
-//         this.props.myEntries.map((entry) => {
-//                 votes[entry.id] = 0
-//             })
-//             this.setState({
-//                 votes: votes
-//             })
-//         }
-//    }
-
 
 
  render() {

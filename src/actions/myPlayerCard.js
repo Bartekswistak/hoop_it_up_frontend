@@ -65,9 +65,10 @@ export const createPlayerCard = (playerCardData, history) => {
                 .then(r => r.json())
                 .then(resp => {
                 if (resp.error) {
-                    // debugger
+                    //  debugger
                     // alert(resp.error)
                 } else {
+                    // debugger
                     dispatch(addPlayerCard(resp))
                     dispatch(resetPlayerCardForm())
                     history.push(`/playercard/${resp.id}`)
