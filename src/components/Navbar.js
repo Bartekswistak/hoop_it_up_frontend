@@ -5,7 +5,7 @@ import Logout from './Logout.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 
  const NavBar = ({currentUser}) => {
-
+    
     return (
     
        <div className="NavBar">

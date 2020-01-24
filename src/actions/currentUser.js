@@ -37,7 +37,7 @@ export const login = (credentials, history) => {
         if(user.error) {
             alert(user.error)
         } else {
-            //debugger
+            // debugger
             dispatch(setCurrentUser(user))
             dispatch(getMyPlayerCard())
             dispatch(resetLoginForm())
@@ -70,7 +70,7 @@ export const getCurrentUser = () => {
         if(user.error) {
             alert(user.error)
         } else {
-             dispatch(setCurrentUser(user.data))
+             dispatch(setCurrentUser(user))
              dispatch(getMyPlayerCard())
         }
     }).catch(console.log)

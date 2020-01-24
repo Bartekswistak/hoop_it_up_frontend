@@ -18,14 +18,12 @@ class App extends React.Component {
   }
 
   render(){
-    const { loggedIn } = this.props.currentUser
-  //  debugger
       return (
           <div className="App">
             <header className="App-header"> 
               <Router>
-              <Home users = {this.props.users}/>
-              {loggedIn ? <NavBar/> : <AppHeader/>}
+              <Home/>
+                {this.props.currentUser.id > 0 ? <NavBar/> : <AppHeader/>}
               </Router>
             </header>
           </div>
