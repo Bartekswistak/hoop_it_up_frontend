@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import AppHeader from "./components/AppHeader.js"
 import {connect} from 'react-redux'
-import {getCurrentUser} from './actions/currentUser.js'
+import { getCurrentUser } from './actions/currentUser.js'
 import { getMyPlayerCard} from './actions/myPlayerCard.js'
+import { fetchUsers } from './actions/fetchUsers.js'
 import {BrowserRouter as Router} from 'react-router-dom'
 import Home from './components/Home.js'
 import NavBar from './components/Navbar.js'
@@ -12,17 +13,18 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.getCurrentUser()
+    this.props.fetchUsers()
     this.props.getMyPlayerCard()
   }
 
   render(){
-    const { loggedIn } = this.props
-  
+    const { loggedIn } = this.props.currentUser
+  //  debugger
       return (
           <div className="App">
             <header className="App-header"> 
               <Router>
-              <Home/>
+              <Home users = {this.props.users}/>
               {loggedIn ? <NavBar/> : <AppHeader/>}
               </Router>
             </header>
@@ -35,8 +37,9 @@ class App extends React.Component {
     return {
       loggedIn: !!state.currentUser,
       currentUser: state.currentUser,
+      users: state.usersReducer,
       myPlayerCard: state.myPlayerCard    
     }
   }
 
-  export default connect(mapStateToProps, {getCurrentUser, getMyPlayerCard})(App);
+  export default connect(mapStateToProps, {getCurrentUser, fetchUsers, getMyPlayerCard})(App);

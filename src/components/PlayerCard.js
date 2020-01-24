@@ -9,7 +9,7 @@ import PlayerCardForm from "./PlayerCardForm.js"
 
 
 
-const PlayerCard = ({playercard}) => {
+const PlayerCard = ({playercard}) => { 
 
     return(
         playercard ? 

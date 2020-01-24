@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { withRouter } from 'react-router-dom';
 import currentUser from '../reducers/currentUser.js';
 
-class PlayerCardForm extends React.Component {
+class PlayerCardForm extends React.Component { 
 
   state = {
     playerNickname: "",
@@ -27,7 +27,7 @@ class PlayerCardForm extends React.Component {
     event.preventDefault()
     let userId = "myuserid"
     this.props.createPlayerCard(this.state, userId)
-    debugger
+    // debugger
     this.setState({
       playerNickname: "",
       playerHeightFeet: "",

@@ -13,7 +13,7 @@ export const resetPlayerCardForm = () => {
     }
 }
 
-export const dataForPlayerCardForm = (playercard) => {
+export const dataForPlayerCardForm = (playercard) => { 
     const editPlayerCardData = {
         player_nickname: playercard.attributes.playerNickname,
         player_height_in_feet:playercard.attributes.playerHeightFeet,

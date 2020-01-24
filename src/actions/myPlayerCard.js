@@ -24,7 +24,7 @@ export const addPlayerCard = (playercard) => {
 
 export const getMyPlayerCard = (playercard) => {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/playercard`, {
+        return fetch(`http://localhost:3000/api/v1/playercard`, { 
             credentials: "include",
             method: "GET",
             headers: {
