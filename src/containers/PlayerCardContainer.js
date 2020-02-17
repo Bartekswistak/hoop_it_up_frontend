@@ -1,31 +1,34 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PlayerCard from '../components/PlayerCard';
-import PlayerCardForm from '../components/PlayerCardForm';
+import Container from 'react-bootstrap/Container';
+import PlayerCard from '../components/PlayerCard'
+import PlayerCardForm from '../components/PlayerCardForm'
+import {getMyPlayerCard} from '../actions/myPlayerCard'
 
-const PlayerCardContainer = ({currentUser}) => {
+class PlayerCardContainer extends React.Component {
 
-  let playercard = currentUser.playercard
+  componentDidMount() {
+    this.props.getCurrentUser()
+    this.props.getMyPlayerCard()
+  }
 
-   
-  return (  
-    <h1>{currentUser.username}'s Player Card </h1>  
+
+  render(){ 
+    return (  
+      <Container>
+        <h1>{currentUser.username}'s Player Card </h1>
+        <PlayerCardForm/>
+      </Container>
     )
-
-    if (!!playercard) {
-      return <PlayerCard currentUser = {this.props.currentUser} />
-    } else {
-      return <PlayerCardForm/>
-    }
+  }
 }
 
 
-const mapStateToProps = (state) => {
-    return ({
-      currentUser: state.currentUser
+const mapStateToProps = state => {
+     return ({
+      currentUser: state.currentUserReducer
     })
   }
-  
 
 
-export default connect(mapStateToProps, PlayerCard)(PlayerCardContainer);
+export default connect(mapStateToProps, {getMyPlayerCard})(PlayerCardContainer);

@@ -33,10 +33,10 @@ class App extends React.Component {
   
   const mapStateToProps = (state) => {
     return ({
-      loggedIn: !!state.currentUser,
-      currentUser: state.currentUser,
+      loggedIn: !!state.currentUserReducer,
+      currentUser: state.currentUserReducer,
       users: state.usersReducer,
-      myPlayerCard: state.myPlayerCard    
+      myPlayerCard: state.myPlayerCardReducer    
     })
   }
 

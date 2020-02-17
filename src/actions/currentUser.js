@@ -2,7 +2,7 @@ import { resetLoginForm } from './loginForm.js'
 import { resetSignupForm } from './signupForm.js'
 import { getMyPlayerCard } from './myPlayerCard.js'
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = user => {
     return {
         type: "SET_CURRENT_USER",
         user
@@ -70,7 +70,6 @@ export const getCurrentUser = () => {
             alert(user.error)
         } else {
              dispatch(setCurrentUser(user))
-             dispatch(getMyPlayerCard())
         }
     }).catch(console.log)
   }
@@ -89,14 +88,14 @@ export const signup = (credentials, history) => {
             },
             body: JSON.stringify(userInfo),     
             }).then(res => res.json())
-             .then(user => {
-               if(user.error) {
-                 alert(user.error)
+             .then(signup => {
+               if(signup.error) {
+                 alert(signup.error)
                } else {
-                dispatch(setCurrentUser(user))
+                dispatch(setCurrentUser(signup))
                 dispatch(resetSignupForm())
                 dispatch(addUser(signup))
-                history.push(`/user/${user.id}`)
+                history.push(`/user/${signup.id}`)
             }
          }).catch(console.log)
     }

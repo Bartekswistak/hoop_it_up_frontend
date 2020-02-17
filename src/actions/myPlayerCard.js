@@ -1,11 +1,11 @@
 import {resetPlayerCardForm} from './playerCardForm.js'
-import {setCurrentUser} from './currentUser.js';
+// import {setCurrentUser} from './currentUser.js';
 // import currentUser from '../reducers/currentUser.js';
 
 export const setPlayerCard = (playercard) => {
     return {
         type: "SET_PLAYERCARD",
-         payload: playercard
+        playercard
     }
 }
 
@@ -24,55 +24,51 @@ export const addPlayerCard = (playercard) => {
     }
 }
 
-export const getMyPlayerCard = (playercard, userId, history) => {
+// Trying to simplify the actions...
+
+export function getMyPlayerCard() {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/users/${userId}/playercard`, { 
-            credentials: "include",
-            method: "GET",
-            headers: {
-                "Content-Type": 'application/json'
-            }
-    }).then(res => res.json())
-    .then(playercard => {
-        if(playercard.error) {
-            //  alert(playercard.error)      
-        } else {
-            // dispatch(setCurrentUser())
-            dispatch(setPlayerCard(playercard))
-            history.push(`/users/${userId}`)
-        }
-    }).catch(console.log)
-  }
+        return fetch ("http://localhost:3000/api/v1/playercard")
+        .then(response => response.json())
+        .then(playercard => dispatch(setPlayerCard(playercard))
+      )
+    }
 }
+
+// export const getMyPlayerCard = (playercard, userId, history) => {
+//     return dispatch => {
+//         return fetch(`http://localhost:3000/api/v1/users/${userId}/playercard`, { 
+//             credentials: "include",
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": 'application/json'
+//             }
+//     }).then(res => res.json())
+//     .then(playercard => {
+//         if(playercard.error) {
+//             //  alert(playercard.error)      
+//         } else {
+//             // dispatch(setCurrentUser())
+//             dispatch(setPlayerCard(playercard))
+//             history.push(`/users/${userId}`)
+//         }
+//     }).catch(console.log)
+//   }
+// }
 
 export const createPlayerCard = (playerCardData, history) => {
     return dispatch => {
-        // const sendablePlayerCardData = {
-        //     // playercard: {
-        //         player_nickname: playerCardData.playerNickname,
-        //         player_height_in_feet: playerCardData.playerHeightFeet,
-        //         player_height_in_inches: playerCardData.playerHeightInches,
-        //         player_weight: playerCardData.playerWeight,
-        //         player_age: playerCardData.playerAge,
-        //         player_fav_player: playerCardData.playerFavPlayer,
-        //         // user_id: currentUser.id
-        //     // }
-        // }
-    
-// debugger
-        // return 
-        fetch(`http://localhost:3000/api/v1/playercard`, {
+        return fetch(`http://localhost:3000/api/v1/playercard`, {
             credentials: "include",
             method: "POST",
             headers: {
                 "Content-Type": 'application/json'
                 }, 
                 body: JSON.stringify(playerCardData)
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then(user => {
                 if (user.error) {
-                    // debugger
+                    //  debugger
                      alert(user.error)
                 } else {
                     // debugger

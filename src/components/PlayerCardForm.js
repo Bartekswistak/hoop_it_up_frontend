@@ -14,8 +14,7 @@ class PlayerCardForm extends React.Component {
     playerHeightInches: "",
     playerAge: "",
     playerWeight: "",
-    playerFavPlayer: "",
-    userId: ""
+    playerFavPlayer: ""
   }
 
   handleChange = (event) => {
@@ -27,9 +26,11 @@ class PlayerCardForm extends React.Component {
   handleSubmit = (event)=> {
     event.preventDefault()
     let userId = this.props.currentUser && this.props.currentUser.id
-    
-    this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
-    
+    // let userId = this.props.location.pathname.split('/')[2].to_i 
+
+    // this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
+    this.props.createPlayerCard(this.state, userId)
+
     this.setState({
       playerNickname: "",
       playerHeightFeet: "",

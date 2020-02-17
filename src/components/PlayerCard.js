@@ -8,23 +8,23 @@ import {getMyPlayerCard} from '../actions/myPlayerCard.js'
 
 
 
-const PlayerCard = (props) => {
+const PlayerCard = (playercard) => {
      
     // componentDidMount() {
     //     this.props.getMyPlayerCard()
     // }
 
-    let playercard = props.currentUser.playercard
+    // let playercard = props.currentUser.playercard
 
 
     return(
         <div className="playerCard">
-            <h3>Player Card for: {playercard.attributes.nickname}</h3>
+            <h3>Nickname: {playercard.playerNickname}</h3>
           <ul>
-            <li><strong>Player Height:</strong> {playercard.attributes.playerHeightFeet} feet {playercard.attributes.playerHeightInched} inches</li>
-            <li><strong>Player Weight:</strong> {playercard.attributes.playerWeight} lbs</li>
-            <li><strong>Player Age:</strong> {playercard.attributes.playerAge}</li>
-            <li><strong>Favorite Player:</strong> {playercard.attributes.playerFavPlayer}</li>
+            <li><strong>Player Height:</strong> {playercard.playerHeightFeet} feet {playercard.playerHeightInched} inches</li>
+            <li><strong>Player Weight:</strong> {playercard.playerWeight} lbs</li>
+            <li><strong>Player Age:</strong> {playercard.playerAge}</li>
+            <li><strong>Favorite Player:</strong> {playercard.playerFavPlayer}</li>
           </ul>
         </div> 
         )
