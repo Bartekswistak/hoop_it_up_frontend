@@ -22,8 +22,7 @@ export const addUser = user => {
     }
   }
 
-export const login = (credentials, history) => {
-
+export const login = (credentials, history) => {   
     return dispatch => {
         return fetch('http://localhost:3000/api/v1/login', {
             credentials: "include",

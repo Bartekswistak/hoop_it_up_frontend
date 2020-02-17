@@ -1,4 +1,6 @@
 import {resetPlayerCardForm} from './playerCardForm.js'
+import {setCurrentUser} from './currentUser.js';
+// import currentUser from '../reducers/currentUser.js';
 
 export const setPlayerCard = (playercard) => {
     return {
@@ -22,9 +24,9 @@ export const addPlayerCard = (playercard) => {
     }
 }
 
-export const getMyPlayerCard = (playercard) => {
+export const getMyPlayerCard = (playercard, userId, history) => {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/playercard`, { 
+        return fetch(`http://localhost:3000/api/v1/users/${userId}/playercard`, { 
             credentials: "include",
             method: "GET",
             headers: {
@@ -33,9 +35,11 @@ export const getMyPlayerCard = (playercard) => {
     }).then(res => res.json())
     .then(playercard => {
         if(playercard.error) {
-             alert(playercard.error)      
+            //  alert(playercard.error)      
         } else {
+            // dispatch(setCurrentUser())
             dispatch(setPlayerCard(playercard))
+            history.push(`/users/${userId}`)
         }
     }).catch(console.log)
   }
@@ -43,44 +47,47 @@ export const getMyPlayerCard = (playercard) => {
 
 export const createPlayerCard = (playerCardData, history) => {
     return dispatch => {
-        const sendablePlayerCardData = {
-            playercard: {
-                player_nickname: playerCardData.playerNickname,
-                player_height_in_feet: playerCardData.playerHeightFeet,
-                player_height_in_inches: playerCardData.playerHeightInches,
-                player_weight: playerCardData.playerWeight,
-                player_age: playerCardData.playerAge,
-                player_fav_player: playerCardData.playerFavPlayer,
-                // user_id: window.location.pathname.split('/')[2]
-            }
-        }
-        return fetch(`http://localhost:3000/api/v1/playercard`, {
+        // const sendablePlayerCardData = {
+        //     // playercard: {
+        //         player_nickname: playerCardData.playerNickname,
+        //         player_height_in_feet: playerCardData.playerHeightFeet,
+        //         player_height_in_inches: playerCardData.playerHeightInches,
+        //         player_weight: playerCardData.playerWeight,
+        //         player_age: playerCardData.playerAge,
+        //         player_fav_player: playerCardData.playerFavPlayer,
+        //         // user_id: currentUser.id
+        //     // }
+        // }
+    
+// debugger
+        // return 
+        fetch(`http://localhost:3000/api/v1/playercard`, {
             credentials: "include",
             method: "POST",
             headers: {
                 "Content-Type": 'application/json'
                 }, 
-                body: JSON.stringify(sendablePlayerCardData)
+                body: JSON.stringify(playerCardData)
             })
-                .then(r => r.json())
-                .then(resp => {
-                if (resp.error) {
-                    //  debugger
-                    // alert(resp.error)
+                .then(res => res.json())
+                .then(user => {
+                if (user.error) {
+                    // debugger
+                     alert(user.error)
                 } else {
                     // debugger
-                    dispatch(addPlayerCard(resp))
+                    dispatch({type: 'ADD_PLAYERCARD', user: user })
+                    dispatch({type: 'ADD_PLAYERCARD_TO_CURRENT_USER', user: user})
                     dispatch(resetPlayerCardForm())
-                    history.push(`/playercard/${resp.id}`)
+                    history.push(`/user/${user.id}`)
                 
                  }
                 }) 
                 .catch(console.log)
-        
     }
 }
 
-export const updatePlayerCard = (playerCardData, history) => {
+export const updatePlayerCard = (playerCardData, history, userId) => {
     return dispatch => {
         const sendablePlayerCardData = {
             playercard: {
@@ -90,10 +97,10 @@ export const updatePlayerCard = (playerCardData, history) => {
                 player_weight: playerCardData.playerWeight,
                 player_age: playerCardData.playerAge,
                 player_fav_player: playerCardData.playerFavPlayer,
-                user_id: playerCardData.userId
+                // user_id: playerCardData.userId
             }
         }
-        return fetch(`http://localhost:3000/api/v1/playercard/${playerCardData.userId}`, {
+        return fetch(`http://localhost:3000/api/v1/users/${userId}/playercard`, {
             credentials: "include",
             method: "PATCH",
             headers: {
@@ -111,7 +118,5 @@ export const updatePlayerCard = (playerCardData, history) => {
                  }
                 })
                 .catch(console.log)
-        
     }
-
 }

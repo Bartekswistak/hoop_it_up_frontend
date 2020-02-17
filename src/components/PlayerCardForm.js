@@ -4,7 +4,7 @@ import { createPlayerCard } from '../actions/myPlayerCard.js'
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import { withRouter } from 'react-router-dom';
-import currentUser from '../reducers/currentUser.js';
+// import currentUser from '../reducers/currentUser.js';
 
 class PlayerCardForm extends React.Component { 
 
@@ -14,7 +14,8 @@ class PlayerCardForm extends React.Component {
     playerHeightInches: "",
     playerAge: "",
     playerWeight: "",
-    playerFavPlayer: ""
+    playerFavPlayer: "",
+    userId: ""
   }
 
   handleChange = (event) => {
@@ -25,19 +26,18 @@ class PlayerCardForm extends React.Component {
 
   handleSubmit = (event)=> {
     event.preventDefault()
-    let userId = "myuserid"
-    this.props.createPlayerCard(this.state, userId)
-    // debugger
+    let userId = this.props.currentUser && this.props.currentUser.id
+    
+    this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
+    
     this.setState({
       playerNickname: "",
       playerHeightFeet: "",
       playerHeightInches: "",
       playerAge: "",
       playerWeight: "",
-      playerFavPlayer: "",
-      user_id: userId
-    })
-    
+      playerFavPlayer: ""
+    })  
   }
   
 
@@ -100,8 +100,9 @@ render(){
       </Form>
     </Container> 
      )
-    };
+    }
   }
+
 
   const mapStateToProps = (state) => {
     return {

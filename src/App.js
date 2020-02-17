@@ -32,12 +32,12 @@ class App extends React.Component {
   }
   
   const mapStateToProps = (state) => {
-    return {
+    return ({
       loggedIn: !!state.currentUser,
       currentUser: state.currentUser,
       users: state.usersReducer,
       myPlayerCard: state.myPlayerCard    
-    }
+    })
   }
 
   export default connect(mapStateToProps, {getCurrentUser, fetchUsers, getMyPlayerCard})(App);

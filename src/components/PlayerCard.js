@@ -1,6 +1,6 @@
 import React from 'react'
-import PlayerCardForm from "./PlayerCardForm.js"
-// import getMyPlayerCard from '../actions/myPlayerCard.js'
+import {connect} from 'react-redux'
+import {getMyPlayerCard} from '../actions/myPlayerCard.js'
 
 // Need a way to check if there is a current user and if the user has a playercard..... current_user.playercard??
 // Need to check if logged in, then check if playercard exists with getMyPlayercard...then either render the playercard or the form.
@@ -8,11 +8,16 @@ import PlayerCardForm from "./PlayerCardForm.js"
 
 
 
+const PlayerCard = (props) => {
+     
+    // componentDidMount() {
+    //     this.props.getMyPlayerCard()
+    // }
 
-const PlayerCard = ({playercard}) => { 
+    let playercard = props.currentUser.playercard
+
 
     return(
-        playercard ? 
         <div className="playerCard">
             <h3>Player Card for: {playercard.attributes.nickname}</h3>
           <ul>
@@ -22,10 +27,18 @@ const PlayerCard = ({playercard}) => {
             <li><strong>Favorite Player:</strong> {playercard.attributes.playerFavPlayer}</li>
           </ul>
         </div> 
-
-        : <PlayerCardForm/>
-    )
-}
+        )
+    
 
 
-export default PlayerCard
+// const mapStateToProps = state => {
+//     return ({
+//     currentUser: state.currentUser
+//   })
+//   }
+
+    }
+
+
+
+export default connect(null, {getMyPlayerCard}) (PlayerCard)
