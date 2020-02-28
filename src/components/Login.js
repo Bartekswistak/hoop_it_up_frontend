@@ -48,7 +48,7 @@ import Container from 'react-bootstrap/Container';
 
 const mapStateToProps = (state) => {
   return {
-      loginFormData: state.loginForm
+      loginFormData: state.loginFormReducer
   }
 }
 

@@ -8,35 +8,25 @@ import {getMyPlayerCard} from '../actions/myPlayerCard.js'
 
 
 
-const PlayerCard = (playercard) => {
+const PlayerCard = (props) => {
      
-    // componentDidMount() {
-    //     this.props.getMyPlayerCard()
-    // }
-
-    // let playercard = props.currentUser.playercard
+let playercard = props.currentUser.playercard
 
 
     return(
-        <div className="playerCard">
-            <h3>Nickname: {playercard.playerNickname}</h3>
-          <ul>
-            <li><strong>Player Height:</strong> {playercard.playerHeightFeet} feet {playercard.playerHeightInched} inches</li>
-            <li><strong>Player Weight:</strong> {playercard.playerWeight} lbs</li>
-            <li><strong>Player Age:</strong> {playercard.playerAge}</li>
-            <li><strong>Favorite Player:</strong> {playercard.playerFavPlayer}</li>
-          </ul>
+        <div className="playercard">
+            <h3>Nickname on the Court: {playercard.player_nickname}</h3>
+          
+            Height: {playercard.player_height_in_feet} feet {playercard.player_height_in_inches} inches
+            <br></br>
+            Weight: {playercard.player_weight} lbs
+            <br></br>
+            Age: {playercard.player_age}
+            <br></br>
+            Favorite Player: {playercard.player_fav_player}
+          
         </div> 
         )
-    
-
-
-// const mapStateToProps = state => {
-//     return ({
-//     currentUser: state.currentUser
-//   })
-//   }
-
     }
 
 

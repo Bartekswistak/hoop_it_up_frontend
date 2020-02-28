@@ -10,7 +10,21 @@ export default function usersReducer(state = initialState, action) {
     case "ADD_USER":
     return {...state, users: [...state.users, action.user]}
 
-        default:
-        return state
+
+    case "ADD_PLAYERCARD":
+    case "ADD_PLAYERCARD_TO_CURRENT_USER":
+ 
+    let users = state.users.map(user => {
+      if (user.id === action.user.id) {
+        return action.user
+      } else {
+        return user
+      }
+    })
+      return {...state, users: users}
+
+
+    default:
+    return state
   }
 }

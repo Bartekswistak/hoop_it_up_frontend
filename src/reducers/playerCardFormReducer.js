@@ -7,6 +7,7 @@ const initialState = {
     playerFavPlayer: ''
 }
 
+
 export default (state = initialState, action) => {
 
     switch(action.type){
@@ -15,10 +16,10 @@ export default (state = initialState, action) => {
                 ...state,
                 [action.formData.name]: action.formData.value
             }
-        case "RESET_PLAYERCARD_FORM":
-            return initialState
-        case "DATA_FOR_EDIT_PLAYERCARD_FORM":
-            return action.editPlayerCardData
+        // case "RESET_PLAYERCARD_FORM":
+        //     return initialState
+        // case "DATA_FOR_EDIT_PLAYERCARD_FORM":
+        //     return action.editPlayerCardData
         default:
             return state;
     } 

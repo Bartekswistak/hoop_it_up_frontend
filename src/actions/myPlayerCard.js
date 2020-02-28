@@ -1,11 +1,8 @@
-import {resetPlayerCardForm} from './playerCardForm.js'
-// import {setCurrentUser} from './currentUser.js';
-// import currentUser from '../reducers/currentUser.js';
 
 export const setPlayerCard = (playercard) => {
     return {
         type: "SET_PLAYERCARD",
-        playercard
+        payload: playercard
     }
 }
 
@@ -56,25 +53,25 @@ export function getMyPlayerCard() {
 //   }
 // }
 
-export const createPlayerCard = (playerCardData, history) => {
+export const createPlayerCard = (playercard, userId, history) => {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/playercard`, {
-            credentials: "include",
+        fetch(`http://localhost:3000/api/v1/users/${userId}/playercard`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": 'application/json'
                 }, 
-                body: JSON.stringify(playerCardData)
-            }).then(res => res.json())
-                .then(user => {
+                body: JSON.stringify(playercard)
+            })
+            .then(res => res.json())
+            .then(user => {
                 if (user.error) {
-                    //  debugger
-                     alert(user.error)
+                    debugger
+                    alert(user.error)
                 } else {
-                    // debugger
+                     debugger
                     dispatch({type: 'ADD_PLAYERCARD', user: user })
                     dispatch({type: 'ADD_PLAYERCARD_TO_CURRENT_USER', user: user})
-                    dispatch(resetPlayerCardForm())
                     history.push(`/user/${user.id}`)
                 
                  }

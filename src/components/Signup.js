@@ -55,7 +55,7 @@ const Signup = ({signupFormData, updateSignupForm, signup, resetSignupForm, hist
 
   const mapStateToProps = (state) => {
     return {
-        signupFormData: state.signupForm
+        signupFormData: state.signupFormReducer
     }
 }
 

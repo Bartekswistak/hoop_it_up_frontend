@@ -19,7 +19,7 @@ import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 
 const mapStateToProps = (state) => {
     return ({
-      currentUser: state.currentUser
+      currentUser: state.currentUserReducer
     })
   }
   

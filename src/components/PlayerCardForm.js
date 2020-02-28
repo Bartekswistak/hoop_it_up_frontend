@@ -8,6 +8,8 @@ import { withRouter } from 'react-router-dom';
 
 class PlayerCardForm extends React.Component { 
 
+
+
   state = {
     playerNickname: "",
     playerHeightFeet: "",
@@ -17,19 +19,18 @@ class PlayerCardForm extends React.Component {
     playerFavPlayer: ""
   }
 
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  handleSubmit = (event)=> {
+  handleSubmit = (event) => {
     event.preventDefault()
     let userId = this.props.currentUser && this.props.currentUser.id
-    // let userId = this.props.location.pathname.split('/')[2].to_i 
-
-    // this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
-    this.props.createPlayerCard(this.state, userId)
+// debugger
+    this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
 
     this.setState({
       playerNickname: "",
@@ -45,8 +46,9 @@ class PlayerCardForm extends React.Component {
 render(){
 
  return ( 
-    
+
     <Container className="playerCardForm"> 
+    <Form.Label><h1>Create Your PlayerCard</h1></Form.Label>
       <Form onSubmit={this.handleSubmit}>        
         <Form.Group controlId="formPlayerNickname">
           <Form.Label>What is your nickname on the court?</Form.Label>
@@ -105,10 +107,4 @@ render(){
   }
 
 
-  const mapStateToProps = (state) => {
-    return {
-      playerCardData: state.playerCardData
-    }
-  }
-
-  export default withRouter(connect( mapStateToProps, {createPlayerCard})(PlayerCardForm))
+  export default withRouter(connect( null, {createPlayerCard})(PlayerCardForm))

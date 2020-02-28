@@ -8,7 +8,6 @@ import {getMyPlayerCard} from '../actions/myPlayerCard'
 class PlayerCardContainer extends React.Component {
 
   componentDidMount() {
-    this.props.getCurrentUser()
     this.props.getMyPlayerCard()
   }
 
@@ -16,8 +15,8 @@ class PlayerCardContainer extends React.Component {
   render(){ 
     return (  
       <Container>
-        <h1>{currentUser.username}'s Player Card </h1>
-        <PlayerCardForm/>
+      {/* if playercard, render playercard, else render form */}
+        <PlayerCard  currentUser = {this.props.currentUser}/>
       </Container>
     )
   }
@@ -31,4 +30,4 @@ const mapStateToProps = state => {
   }
 
 
-export default connect(mapStateToProps, {getMyPlayerCard})(PlayerCardContainer);
+export default connect(mapStateToProps, {getMyPlayerCard})(PlayerCardContainer)
