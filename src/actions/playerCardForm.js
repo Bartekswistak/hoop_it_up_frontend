@@ -1,9 +1,10 @@
     
-export const updatePlayerCardForm = (name, value) => {
-    const formData = { name, value }
+export const updatePlayerCardForm = (playerCardData) => {
+    
+    
     return {
         type: "UPDATE_PLAYERCARD_FORM", 
-        formData
+        playerCardData
     }
 }
 
@@ -13,17 +14,19 @@ export const resetPlayerCardForm = () => {
     }
 }
 
-export const dataForPlayerCardForm = (playercard) => { 
-    const editPlayerCardData = {
-        player_nickname: playercard.attributes.playerNickname,
-        player_height_in_feet:playercard.attributes.playerHeightFeet,
-        player_height_in_inches: playercard.attributes.playerHeightInches,
-        player_weight: playercard.attributes.playerWeight,
-        player_age: playercard.attributes.playerAge,
-        player_fav_player: playercard.attributes.playerFavPlayer
+export const dataForPlayerCardForm = playercard => { 
+    
+    const playerCardData = {
+        playerNickname: playercard.player_nickname,
+        playerHeightFeet:playercard.player_height_in_feet,
+        playerHeightInches: playercard.player_height_in_inches,
+        playerWeight: playercard.player_weight,
+        playerAge: playercard.player_age,
+        playerFavPlayer: playercard.player_fav_player
      }
-     return {
-         type: "DATA_FOR_PLAYERCARD_FORM",
-         editPlayerCardData
-     }
+     
+    return {
+        type: "DATA_FOR_PLAYERCARD_FORM",
+        playerCardData
+    }
  }

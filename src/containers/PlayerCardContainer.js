@@ -2,14 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Container from 'react-bootstrap/Container';
 import PlayerCard from '../components/PlayerCard'
-import PlayerCardForm from '../components/PlayerCardForm'
-import {getMyPlayerCard} from '../actions/myPlayerCard'
+// import PlayerCardForm from '../components/PlayerCardForm'
+// import {getMyPlayerCard} from '../actions/myPlayerCard'
 
 class PlayerCardContainer extends React.Component {
 
-  componentDidMount() {
-    this.props.getMyPlayerCard()
-  }
+  // componentDidMount() {
+  //   this.props.getMyPlayerCard()
+  // }
 
 
   render(){ 
@@ -30,4 +30,4 @@ const mapStateToProps = state => {
   }
 
 
-export default connect(mapStateToProps, {getMyPlayerCard})(PlayerCardContainer)
+export default connect(mapStateToProps)(PlayerCardContainer)

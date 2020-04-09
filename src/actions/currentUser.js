@@ -1,6 +1,5 @@
 import { resetLoginForm } from './loginForm.js'
 import { resetSignupForm } from './signupForm.js'
-import { getMyPlayerCard } from './myPlayerCard.js'
 
 export const setCurrentUser = user => {
     return {
@@ -38,7 +37,6 @@ export const login = (credentials, history) => {
         } else {
             // debugger
             dispatch(setCurrentUser(user))
-            dispatch(getMyPlayerCard())
             dispatch(resetLoginForm())
             history.push(`/user/${user.id}`)
         }

@@ -1,14 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createPlayerCard } from '../actions/myPlayerCard.js'
-import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
+// import Form from 'react-bootstrap/Form';
+// import Container from 'react-bootstrap/Container';
 import { withRouter } from 'react-router-dom';
-// import currentUser from '../reducers/currentUser.js';
 
 class PlayerCardForm extends React.Component { 
-
-
 
   state = {
     playerNickname: "",
@@ -19,7 +16,6 @@ class PlayerCardForm extends React.Component {
     playerFavPlayer: ""
   }
 
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -28,10 +24,10 @@ class PlayerCardForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    let userId = this.props.currentUser && this.props.currentUser.id
-// debugger
+    let userId = Number(this.props.location.pathname.split("/")[2])
+//debugger
     this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
-
+    
     this.setState({
       playerNickname: "",
       playerHeightFeet: "",
@@ -41,70 +37,52 @@ class PlayerCardForm extends React.Component {
       playerFavPlayer: ""
     })  
   }
-  
 
-render(){
+  render() {
+    return ( 
+      <form onSubmit= {this.handleSubmit}> 
 
- return ( 
-
-    <Container className="playerCardForm"> 
-    <Form.Label><h1>Create Your PlayerCard</h1></Form.Label>
-      <Form onSubmit={this.handleSubmit}>        
-        <Form.Group controlId="formPlayerNickname">
-          <Form.Label>What is your nickname on the court?</Form.Label>
-            <Form.Control 
-              type="text"
+       <h1>Create Your PlayerCard</h1>
+        
+          <label>What is your nickname on the court?</label>
+            <input type="text"
               value={this.state.playerNickname}
               name="playerNickname" 
               onChange={this.handleChange}/><br/>
-         </Form.Group>
 
-        <Form.Group controlId="formPlayerHeight">
-          <Form.Label>How tall are you?</Form.Label>
-            <Form.Control 
-              type="text"
+          <label>How tall are you?</label>
+            <input type="integer"
               value={this.state.playerHeightFeet}
               name="playerHeightFeet" 
               onChange={this.handleChange}/> Feet
-            <Form.Control 
-              type="text" 
+            <input type="integer" 
               value={this.state.playerHeightInches}
               name="playerHeightInches" 
               onChange={this.handleChange}/>Inches<br/>
-        </Form.Group>
-
-        <Form.Group controlId="formPlayerWeight">
-          <Form.Label>How much do you weigh?</Form.Label>
-            <Form.Control 
-              type="text" 
+        
+          <label>How much do you weigh?</label>
+            <input 
+              type="integer" 
               value={this.state.playerWeight}
               name="playerWeight" 
               onChange={this.handleChange}/>Lbs<br/>
-        </Form.Group>
-
-        <Form.Group controlId="formPlayerAge">
-          <Form.Label>How old are you?</Form.Label>
-            <Form.Control 
-              type="text"
+       
+       <label>How old are you?</label>
+            <input type="integer"
               value={this.state.playerAge} 
               name="playerAge" 
               onChange={this.handleChange}/><br/>
-        </Form.Group>
-
-        <Form.Group controlId="formPlayerFavPlayer">
-          <Form.Label>Who is your favorite basketball player?</Form.Label>
-            <Form.Control 
-              type="text" 
+       
+          <label>Who is your favorite basketball player?</label>
+            <input type="text" 
               value={this.state.playerFavPlayer}
               name="playerFavPlayer" 
               onChange={this.handleChange}/><br/>
-        </Form.Group>
-        <Form.Control type="submit" value={"Create Player Card"} />
-      </Form>
-    </Container> 
-     )
-    }
-  }
+        
+        <input type="submit" value={"Create Player Card"} />
+      </form>
+    )
+  } 
+}
 
-
-  export default withRouter(connect( null, {createPlayerCard})(PlayerCardForm))
+export default withRouter(connect(null, {createPlayerCard})(PlayerCardForm))

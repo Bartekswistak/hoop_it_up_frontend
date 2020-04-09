@@ -16,7 +16,7 @@ export default function usersReducer(state = initialState, action) {
  
     let users = state.users.map(user => {
       if (user.id === action.user.id) {
-        return action.user
+        return action.payload
       } else {
         return user
       }
