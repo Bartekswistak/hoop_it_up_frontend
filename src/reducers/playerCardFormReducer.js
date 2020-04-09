@@ -1,10 +1,10 @@
 const initialState = {
-    playerNickname: "",
-    playerHeightFeet: "",
-    playerHeightInches: "",
-    playerWeight: "",
-    playerAge: "",
-    playerFavPlayer: ""
+    player_nickname: "",
+    player_height_in_feet: "",
+    player_height_in_inches: "",
+    player_age: "",
+    player_weight: "",
+    player_fav_player: ""
 }
 
 
