@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createPlayerCard } from '../actions/myPlayerCard.js'
-// import Form from 'react-bootstrap/Form';
-// import Container from 'react-bootstrap/Container';
 import { withRouter } from 'react-router-dom';
+
 
 class PlayerCardForm extends React.Component { 
 
@@ -24,8 +23,8 @@ class PlayerCardForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    let userId = Number(this.props.location.pathname.split("/")[2])
-//debugger
+    
+    let userId = this.props.currentUser.id
     this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
     
     this.setState({
@@ -35,7 +34,7 @@ class PlayerCardForm extends React.Component {
       player_age: "",
       player_weight: "",
       player_fav_player: ""
-    })  
+    })
   }
 
   render() {

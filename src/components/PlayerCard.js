@@ -6,9 +6,6 @@ const PlayerCard = (props) => {
      
 let playercard = props.currentUser.playercard
 
-if (playercard == null) {
-    return <PlayerCardForm/>;
-}
     return(
         <div className="playercard">
             <h3>Nickname on the Court: {playercard.player_nickname}</h3>
@@ -20,7 +17,8 @@ if (playercard == null) {
             Age: {playercard.player_age}
             <br></br>
             Favorite Player: {playercard.player_fav_player}
-          
+            <br></br>
+            <button>Edit my Player Card </button>
         </div> 
         )        
     }

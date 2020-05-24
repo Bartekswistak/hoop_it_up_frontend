@@ -64,9 +64,9 @@ export const createPlayerCard= (playercard, userId, history) => {
                     // debugger
                     alert(user.error)
                 } else {
-                //    debugger
-                    dispatch({type: 'ADD_PLAYERCARD', user: user })
-                    dispatch({type: 'ADD_PLAYERCARD_TO_CURRENT_USER', user: user})
+                // //    debugger
+                //     dispatch({type: 'ADD_PLAYERCARD', user: user })
+                //     dispatch({type: 'ADD_PLAYERCARD_TO_CURRENT_USER', user: user})
                     dispatch(resetPlayerCardForm())
                     history.push(`/user/${user.id}`)
                 

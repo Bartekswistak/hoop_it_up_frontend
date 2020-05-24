@@ -39,8 +39,8 @@ import Container from 'react-bootstrap/Container';
                   name="password" 
                   placeholder="password"
                   onChange={handleChange}/> <br/>
+          </Form.Group>
           <Form.Control className="loginButton"type="submit" value="Login"/>
-         </Form.Group>
        </Form>
       </Container>
   )
