@@ -4,9 +4,9 @@ import {fetchUsers} from '../actions/fetchUsers'
 
 class UsersContainer extends React.Component {
 
-    componentDidMount() {
-      this.props.fetchUsers()
-    }
+    // componentDidMount() {
+    //   this.props.fetchUsers()
+    // }
 
     render(){
         return(

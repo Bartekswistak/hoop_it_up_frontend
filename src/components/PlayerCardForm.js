@@ -1,19 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createPlayerCard } from '../actions/myPlayerCard.js'
-import { withRouter } from 'react-router-dom';
-
+import { createPlayerCard, getMyPlayerCard} from '../actions/myPlayerCard.js'
+import NewPlayerCard from '../components/NewPlayerCard.js'
 
 class PlayerCardForm extends React.Component { 
 
-  state = {
+  constructor(){
+    super()
+  
+
+  this.state = {
     player_nickname: "",
     player_height_in_feet: "",
     player_height_in_inches: "",
     player_age: "",
     player_weight: "",
-    player_fav_player: ""
+    player_fav_player: "",
+    submitted: false
   }
+  this.handleChange= this.handleChange.bind(this);
+  this.handleSubmit= this.handleSubmit.bind(this); 
+}
 
   handleChange = (event) => {
     this.setState({
@@ -23,23 +30,38 @@ class PlayerCardForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    
     let userId = this.props.currentUser.id
     this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
-    
-    this.setState({
-      player_nickname: "",
-      player_height_in_feet: "",
-      player_height_in_inches: "",
-      player_age: "",
-      player_weight: "",
-      player_fav_player: ""
-    })
+    // this.setState({submitted:true})
+    this.state.submitted = true
+    // this.showPlayerCard()
+
+    // this.setState({
+    //   player_nickname: "",
+    //   player_height_in_feet: "",
+    //   player_height_in_inches: "",
+    //   player_age: "",
+    //   player_weight: "",
+    //   player_fav_player: "",
+    //   submitted: false
+    // })
+      
   }
 
+  // showPlayerCard() {
+  //   debugger
+  //   return <NewPlayerCard playercard={this.state}/>
+  // }
+
   render() {
+    // debugger
+    //MAYBE CONDITIONAL RENDERING HERE, ONCE SUBMITTED, RENDER THE NEWPLAYERCARD????
+      if (this.state.submitted === false) {
+
     return ( 
-      <form onSubmit= {this.handleSubmit}> 
+      
+      <div>
+        <form onSubmit= {this.handleSubmit}> 
 
        <h1>Create Your PlayerCard</h1>
         
@@ -80,8 +102,25 @@ class PlayerCardForm extends React.Component {
         
         <input type="submit" value={"Create Player Card"} />
       </form>
+      {/* {this.state.submitted && this.showPlayerCard()} */}
+    </div> 
     )
+    } else {
+      return( <NewPlayerCard playercard={this.state}/>)
+   }
   } 
 }
 
-export default withRouter(connect(null, {createPlayerCard})(PlayerCardForm))
+const mapStateToProps = (state) => {
+  // console.log('state' + state)
+  // debugger
+  return{
+      playerCardForm: state.playerCardFormReducer,
+      playercard: state.myPlayerCardReducer,
+      currentUser: state.currentUserReducer
+    }
+  }
+
+
+
+export default connect(mapStateToProps, {createPlayerCard, getMyPlayerCard})(PlayerCardForm)

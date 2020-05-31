@@ -1,26 +1,35 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PlayerCardForm from '../components/PlayerCardForm'
+// import { fetchPlayercard } from '../actions/myPlayerCard'
 
-const PlayerCard = (props) => {
-     
-let playercard = props.currentUser.playercard
+class PlayerCard extends React.Component {
+
+    render(){
+    // fetchPlayercard(this.props.currentUser.id)
 
     return(
         <div className="playercard">
-            <h3>Nickname on the Court: {playercard.player_nickname}</h3>
+            <h3>Nickname on the Court: {this.props.currentUser.playercard.player_nickname}</h3>
           
-            Height: {playercard.player_height_in_feet} feet {playercard.player_height_in_inches} inches
+            Height: {this.props.currentUser.playercard.player_height_in_feet} feet {this.props.currentUser.playercard.player_height_in_inches} inches
             <br></br>
-            Weight: {playercard.player_weight} lbs
+            Weight: {this.props.currentUser.playercard.player_weight} lbs
             <br></br>
-            Age: {playercard.player_age}
+            Age: {this.props.currentUser.playercard.player_age}
             <br></br>
-            Favorite Player: {playercard.player_fav_player}
+            Favorite Player: {this.props.currentUser.playercard.player_fav_player}
             <br></br>
             <button>Edit my Player Card </button>
         </div> 
         )        
     }
+}
 
-export default connect(null) (PlayerCard)
+const mapStateToProps = state => {
+    return ({
+     currentUser: state.currentUserReducer,
+     playercard: state.myPlayerCardReducer
+   })
+ }
+
+export default connect(mapStateToProps) (PlayerCard)

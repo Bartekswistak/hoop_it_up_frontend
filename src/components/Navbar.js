@@ -3,32 +3,32 @@ import {connect} from 'react-redux'
 import {Route, Link} from "react-router-dom";
 import Logout from './Logout.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
+// import { fetchPlayercard } from '../actions/myPlayerCard'
+import GoogleMap from './GoogleMap.js'
+
 
  const NavBar = ({currentUser}) => {
-
-  let id = currentUser.id
 
     return (
       <div className="NavBar">
         <h3 className="navlink">Welcome {currentUser.username}</h3>
 
 
-         <Link to={`/playercard/${id}`}> My Player Card </Link>
+         <Link to={`/myplayercard`}> My Player Card </Link>
          <Link to="/courts"> Find Courts</Link>
 
-          {/* both seem to work fine here  */}
+          <Route path={`/myplayercard`}   component={PlayerCardContainer}/>
+          <Route path={`/courts`}   component={GoogleMap}/>
 
-            <Route path={`/playercard/${id}`}  render={(currentUser) => <PlayerCardContainer {...currentUser}/>} />
-            {/* <Route path={`/playercard/${id}`}  component = {PlayerCardContainer}/> */}
-
-            {!!currentUser ? <Logout/> : null}
+          {!!currentUser ? <Logout/> : null}
        </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return ({
-      currentUser: state.currentUserReducer
+      currentUser: state.currentUserReducer,
+      playercard: state.myPlayerCardReducer
     })
   }
   
