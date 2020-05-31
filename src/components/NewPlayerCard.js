@@ -1,17 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { getMyPlayerCard } from '../actions/myPlayerCard'
 
 class NewPlayerCard extends React.Component {
-
-    // componentDidMount() {
-    //     console.log('props:' + this.props)
-    //     let userId = this.props.currentUser.id
-    //     getMyPlayerCard(userId)
-
-    //     // debugger
-    // }
-    
 
 render(){
     //  debugger
@@ -39,4 +29,4 @@ const mapStateToProps = (state) => ({
    })
  
 
-export default connect(mapStateToProps, {getMyPlayerCard}) (NewPlayerCard)
+export default connect(mapStateToProps) (NewPlayerCard)

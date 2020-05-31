@@ -32,30 +32,11 @@ class PlayerCardForm extends React.Component {
     event.preventDefault()
     let userId = this.props.currentUser.id
     this.props.createPlayerCard({...this.state, user_id: userId}, userId, this.props.history)
-    // this.setState({submitted:true})
     this.state.submitted = true
-    // this.showPlayerCard()
-
-    // this.setState({
-    //   player_nickname: "",
-    //   player_height_in_feet: "",
-    //   player_height_in_inches: "",
-    //   player_age: "",
-    //   player_weight: "",
-    //   player_fav_player: "",
-    //   submitted: false
-    // })
-      
   }
 
-  // showPlayerCard() {
-  //   debugger
-  //   return <NewPlayerCard playercard={this.state}/>
-  // }
-
   render() {
-    // debugger
-    //MAYBE CONDITIONAL RENDERING HERE, ONCE SUBMITTED, RENDER THE NEWPLAYERCARD????
+
       if (this.state.submitted === false) {
 
     return ( 
@@ -102,7 +83,6 @@ class PlayerCardForm extends React.Component {
         
         <input type="submit" value={"Create Player Card"} />
       </form>
-      {/* {this.state.submitted && this.showPlayerCard()} */}
     </div> 
     )
     } else {
@@ -112,8 +92,6 @@ class PlayerCardForm extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log('state' + state)
-  // debugger
   return{
       playerCardForm: state.playerCardFormReducer,
       playercard: state.myPlayerCardReducer,

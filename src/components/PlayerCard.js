@@ -1,11 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import { fetchPlayercard } from '../actions/myPlayerCard'
 
 class PlayerCard extends React.Component {
 
     render(){
-    // fetchPlayercard(this.props.currentUser.id)
 
     return(
         <div className="playercard">
