@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Link} from "react-router-dom";
 import Logout from './Logout.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
-import GoogleMap from './GoogleMap.js'
-
+import MapContainer from '../containers/MapContainer.js'
 
  const NavBar = ({currentUser}) => {
 // debugger
@@ -17,7 +16,7 @@ import GoogleMap from './GoogleMap.js'
          <Link to="/courts"> Find Courts</Link>
 
           <Route path={`/myplayercard/`}   component={PlayerCardContainer}/> 
-          <Route path={`/courts`}   component={GoogleMap}/>
+          <Route path={`/courts`}   component={MapContainer}/>
 
           {!!currentUser ? <Logout/> : null}
        </div>
