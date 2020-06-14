@@ -1,42 +1,45 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createPlayerCard } from '../actions/myPlayerCard.js'
+import { updatePlayerCard} from '../actions/myPlayerCard.js'
 import NewPlayerCard from '../components/NewPlayerCard.js'
+// import PlayerCard from '../components/PlayerCard.js'
 
-class PlayerCardForm extends React.Component { 
+class EditNewCard extends React.Component { 
 
-  constructor(){
-    super()
-  
+  constructor(props){
+    super(props)
 
-  this.state = {
-    player_nickname: "",
-    player_height_in_feet: "",
-    player_height_in_inches: "",
-    player_age: "",
-    player_weight: "",
-    player_fav_player: "",
+this.state = {
+    id: this.props.playercard.playercard.id,
+    player_nickname: this.props.playercard.playercard.player_nickname,
+    player_height_in_feet: this.props.playercard.playercard.player_height_in_feet,
+    player_height_in_inches: this.props.playercard.playercard.player_height_in_inches,
+    player_age: this.props.playercard.playercard.player_age,
+    player_weight: this.props.playercard.playercard.player_weight,
+    player_fav_player: this.props.playercard.playercard.player_fav_player,
     submitted: false
-  }
+  } 
   this.handleChange= this.handleChange.bind(this);
   this.handleSubmit= this.handleSubmit.bind(this); 
 }
 
-  handleChange = (event) => {
+   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  handleSubmit = (event) => {
+   handleSubmit = (event) => {
+    //  debugger
     event.preventDefault()
-    let userId = this.props.currentUser.id
-    this.props.createPlayerCard({...this.state, user_id: userId}, userId)
+    let playercardId = this.props.playercard.playercard.id
+    this.props.updatePlayerCard({...this.state, id: playercardId}, playercardId)
     this.state.submitted = true
+
   }
 
   render() {
-
+    // debugger
       if (this.state.submitted === false) {
 
     return ( 
@@ -44,7 +47,7 @@ class PlayerCardForm extends React.Component {
       <div>
         <form onSubmit= {this.handleSubmit}> 
 
-       <h1>Create Your PlayerCard</h1>
+       <h1>Edit Your PlayerCard</h1>
         
           <label>What is your nickname on the court?</label>
             <input type="text"
@@ -81,12 +84,12 @@ class PlayerCardForm extends React.Component {
               name="player_fav_player" 
               onChange={this.handleChange}/><br/>
         
-        <input type="submit" value={"Create Player Card"} />
+        <input type="submit" value={"Update Player Card"} />
       </form>
     </div> 
     )
     } else {
-      return( <NewPlayerCard/> )
+      return( <NewPlayerCard />)
    }
   } 
 }
@@ -100,4 +103,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, {createPlayerCard})(PlayerCardForm)
+export default connect(mapStateToProps, {updatePlayerCard})(EditNewCard)

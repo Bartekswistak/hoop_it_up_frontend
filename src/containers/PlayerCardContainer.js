@@ -7,22 +7,32 @@ import NewPlayerCard from '../components/NewPlayerCard'
   class PlayerCardContainer extends React.Component {
 
     render(){
+
       let playercard = this.props.currentUser.playercard //already created playercard
-      let newcard = this.props.playercard.playercard  //newly submitted playercard
-
-    // debugger
-
-      if (!!playercard) {
-        return( <PlayerCard/>)  //if the user has a card
-      } 
-
-      if (!!newcard) {
-        return (<NewPlayerCard/>) //if a new card was submitted
+      let newcard = this.props.playercard.playercard //newly submitted/edited playercard
+        
+      // debugger
+      if (!playercard && !newcard){
+        return (<PlayerCardForm currentUser = {this.props.currentUser}/>) //if neither above then render form
       }
 
-      return (<PlayerCardForm currentUser = {this.props.currentUser}/>) //if neither above then render form
+      if (!!newcard){
+        var newCardId = this.props.playercard.playercard.id
+        if (newcard.id === newCardId){
+          return (<NewPlayerCard/>) //if a new card was submitted
+        } 
+      }
+
+      if (!!playercard){
+        var userCardId = this.props.currentUser.playercard.id
+        if (playercard.id === userCardId){
+          return( <PlayerCard/>)  //if the user has a card
+        }
+      } 
     }
   }
+
+
 
 const mapStateToProps = state => {
     return ({

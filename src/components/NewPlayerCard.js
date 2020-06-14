@@ -1,10 +1,29 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import EditNewCard from './EditNewCard.js'
+
 
 class NewPlayerCard extends React.Component {
 
+    constructor() {
+        super();
+    
+        this.state = {
+          clicked: false
+        };
+    
+        this.handleClick = this.handleClick.bind(this);
+      }
+    
+      handleClick() {
+        this.setState({
+          clicked: true
+        });
+      }
+
 render(){
-    //  debugger
+        // debugger
+    if (!this.state.clicked) {
     return(
         <div className="playercard">
             <h3>Nickname on the Court: {this.props.playercard.playercard.player_nickname}</h3>
@@ -17,16 +36,20 @@ render(){
             <br></br>
             Favorite Player: {this.props.playercard.playercard.player_fav_player}
             <br></br>
-            <button>Edit my Player Card </button>
+            <button onClick={this.handleClick}> Edit my Player Card 
+            </button>       
         </div> 
-        )      
+        )
+    }
+        return <EditNewCard />      
     }
 }
 
-const mapStateToProps = (state) => ({
-     currentUser: state.currentUserReducer,
-     playercard: state.myPlayerCardReducer
+const mapStateToProps = state => {
+    return ({
+     playercard: state.myPlayerCardReducer,
+     currentUser: state.currentUserReducer
    })
- 
+ }
 
 export default connect(mapStateToProps) (NewPlayerCard)

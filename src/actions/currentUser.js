@@ -1,10 +1,19 @@
 import { resetLoginForm } from './loginForm.js'
 import { resetSignupForm } from './signupForm.js'
+import { clearPlayerCard } from './myPlayerCard.js'
 
 export const setCurrentUser = user => {
     return {
         type: "SET_CURRENT_USER",
         user
+    }
+}
+
+export const addPlayerCardToUser = (playercard) => {
+    // debugger
+    return {
+        type: "ADD_PLAYERCARD_TO_USER",
+        playercard
     }
 }
 
@@ -35,7 +44,7 @@ export const login = (credentials, history) => {
         if(user.error) {
             alert(user.error)
         } else {
-            // debugger
+            //  debugger
             dispatch(setCurrentUser(user))
             dispatch(resetLoginForm())
             history.push(`/user/${user.id}`)
@@ -47,6 +56,7 @@ export const login = (credentials, history) => {
 export const logout = () => {
     return dispatch => {
         dispatch(clearCurrentUser())
+        dispatch(clearPlayerCard())
         return fetch('http://localhost:3000/api/v1/logout', {
             credentials: "include",
             method: "DELETE"    

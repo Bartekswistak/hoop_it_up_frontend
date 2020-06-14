@@ -1,10 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import EditPlayerCard from './EditPlayerCard.js'
+
+
 
 class PlayerCard extends React.Component {
 
-    render(){
+    constructor() {
+        super();
+    
+        this.state = {
+          clicked: false
+        };
+    
+        this.handleClick = this.handleClick.bind(this);
+      }
+    
+      handleClick() {
+        this.setState({
+          clicked: true
+        });
+      }
 
+    render(){
+      // debugger
+        if (!this.state.clicked) {
     return(
         <div className="playercard">
             <h3>Nickname on the Court: {this.props.currentUser.playercard.player_nickname}</h3>
@@ -17,9 +37,12 @@ class PlayerCard extends React.Component {
             <br></br>
             Favorite Player: {this.props.currentUser.playercard.player_fav_player}
             <br></br>
-            <button>Edit my Player Card </button>
+            <button onClick={this.handleClick}> Edit my Player Card 
+            </button>
         </div> 
-        )        
+        )   
+    }
+    return <EditPlayerCard/>     
     }
 }
 
