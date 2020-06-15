@@ -12,8 +12,8 @@ import GoogleMap from './GoogleMap.js'
         <h3 className="navlink">Welcome {currentUser.username}</h3>
       
 
-         <Link to={`/myplayercard`}> My Player Card </Link>
-         <Link to={"/courts"}> Find Courts</Link>
+         <Link to={`/myplayercard`}> My Player Card</Link>
+            //  <Link to={"/courts"}>Find Courts</Link>
 
           <Route path={`/myplayercard/`}   component={PlayerCardContainer}/> 
           <Route path={`/courts`}   component={GoogleMap} />

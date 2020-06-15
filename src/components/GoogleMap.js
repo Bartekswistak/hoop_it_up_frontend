@@ -7,18 +7,17 @@ export class GoogleMap extends React.Component {
     super()
     let my_map = document.getElementById("map")
         my_map.style.display = "block";
-// debugger
-        // 
-
     }
   
 render(){
   return(
-    <div id="mapcontainer"></div>
+    <div id="mapcontainer">
+      <h3>Here are some basketball courts near you</h3>
+      <div>Click on any court to see how many hoopers are there!!</div>
+    </div>
     )
   }
   
 }
-// ReactDOM.render(my_map, document.getElementById("map"))
 
 export default (GoogleMap);

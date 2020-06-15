@@ -9,6 +9,7 @@ import {withRouter} from 'react-router-dom'
         event.preventDefault()
         logout()
         history.push('/')
+        document.getElementById("map").style.display = "none";
     }
 
     return (
