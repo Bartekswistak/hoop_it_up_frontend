@@ -33,7 +33,6 @@ function initMap() {
     location: venice,
     radius: '50000',
     name: ['basketball court']
-    
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -47,7 +46,6 @@ function callback(results, status) {
     }
   }
 }
-
       function createMarker(place) {
         var marker = new google.maps.Marker({
           map: map,
@@ -59,26 +57,12 @@ function callback(results, status) {
           infowindow.open(map, this);
         });
       }
-
-      // document.getElementsByClassName("NavBar").appendChild(document.getElementById("map"))
-  </script>
-    
+  </script>   
   </head>
-
   <body>
 
-
-
-
-    
     <div id="root"> </div>
-    
-    <div id="map">
-    </div>
+    <div id="map"></div>  
 
-
-  
-    
-    
   </body>
 </html>

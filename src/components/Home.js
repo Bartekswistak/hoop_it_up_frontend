@@ -13,7 +13,6 @@ const Home = () => {
             <div className= "home">
                 <h1>Welcome to Hoop it Up</h1>
                 <p>Finding quality pickup games in your area since 2019</p>             
-                <br/>
             </div>
         </Container>
     )

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: black;
   position: relative;
 }
 
@@ -9,8 +10,11 @@ div.home {
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 150vh;
+  background-image: url("./images/basketball_court.png");
+  background-position: center;
+  background-color: black;
+  background-size: cover;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -45,16 +49,25 @@ h3.navlink {
 
 
 div#map {
-  top: 750px;
+  top: 540px;
   position: absolute;
-  height: 500px; 
-  width: 80%;
-  margin-left: 10%;
+  height: 350px; 
+  width: 50%;
+  margin-left: 25%;
+  background-color: black;
   display: none; 
 }
 
 #mapcontainer {
   position: relative;
-  top:120px;
+  
 }
 
+html {
+  background-color: black;
+}
+
+div#navi {
+  color: darkorange;
+  font-size: bold;
+}

@@ -14,6 +14,7 @@ render(){
     <div id="mapcontainer">
       <h3>Here are some basketball courts near you</h3>
       <div>Click on any court to see how many hoopers are there!!</div>
+      <div>And make sure to check in if you trying to hoop it up!</div>
     </div>
     )
   }

@@ -6,18 +6,22 @@ import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 import GoogleMap from './GoogleMap.js'
 
  const NavBar = ({currentUser}) => {
+
+  const handleClick = () => {
+    document.getElementById("map").style.display="none";
+  }
 // debugger
     return (
       <div className="NavBar">
         <h3 className="navlink">Welcome {currentUser.username}</h3>
-      
+          <div id="navi">
 
-         <Link to={`/myplayercard`}> My Player Card</Link>
-            //  <Link to={"/courts"}>Find Courts</Link>
-
-          <Route path={`/myplayercard/`}   component={PlayerCardContainer}/> 
-          <Route path={`/courts`}   component={GoogleMap} />
-
+         <Link to={`/myplayercard`} onClick={handleClick}> My Player Card</Link><span>//</span>
+          <Link to={"/courts"}>Find Courts</Link>
+          </div>
+          <Route path={`/myplayercard/`} component={PlayerCardContainer}/> 
+          <Route path={`/courts`} component={GoogleMap} />
+          
           {!!currentUser ? <Logout/> : null}
        </div>
     )
