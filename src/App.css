@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 div.home {
@@ -41,4 +42,14 @@ h3.navlink {
   top: 10px;
   left: 125px;
 }
+
+
+#map {
+  position: absolute;
+  height: 500px; 
+  width: 100%;
+  display: none; 
+}
+
+
 

@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import AppHeader from "./components/AppHeader.js"
 import {connect} from 'react-redux'
-// import { fetchPlayercard } from './actions/myPlayerCard.js'
 import { fetchUsers } from './actions/fetchUsers.js'
 import {BrowserRouter as Router} from 'react-router-dom'
 import Home from './components/Home.js'
