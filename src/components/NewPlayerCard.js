@@ -25,20 +25,21 @@ render(){
         // debugger
     if (!this.state.clicked) {
     return(
-        <div className="playercard">
-            <h3>Nickname on the Court: {this.props.playercard.playercard.player_nickname}</h3>
-          
-            Height: {this.props.playercard.playercard.player_height_in_feet} feet {this.props.playercard.playercard.player_height_in_inches} inches
-            <br></br>
-            Weight: {this.props.playercard.playercard.player_weight} lbs
-            <br></br>
-            Age: {this.props.playercard.playercard.player_age}
-            <br></br>
-            Favorite Player: {this.props.playercard.playercard.player_fav_player}
-            <br></br>
-            <button onClick={this.handleClick}> Edit my Player Card 
-            </button>       
-        </div> 
+      <div className="playercard">
+      <h3 id="nickname">Nickname on the Court: {this.props.playercard.playercard.player_nickname}</h3>
+    <div id="stats">
+      Height: {this.props.playercard.playercard.player_height_in_feet} feet {this.props.playercard.playercard.player_height_in_inches} inches
+      <br></br>
+      Weight: {this.props.playercard.playercard.player_weight} lbs
+      <br></br>
+      Age: {this.props.playercard.playercard.player_age}
+      <br></br>
+      Favorite Player: {this.props.playercard.playercard.player_fav_player}
+      <br></br>
+      </div>
+      <button onClick={this.handleClick}> Edit my Player Card 
+      </button>
+  </div> 
         )
     }
         return <EditNewCard />      

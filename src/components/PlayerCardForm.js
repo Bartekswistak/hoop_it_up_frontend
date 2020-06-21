@@ -44,7 +44,7 @@ class PlayerCardForm extends React.Component {
       <div>
         <form onSubmit= {this.handleSubmit}> 
 
-       <h1>Create Your PlayerCard</h1>
+       <h1 id="formcard">Create Your PlayerCard</h1>
         
           <label>What is your nickname on the court?</label>
             <input type="text"

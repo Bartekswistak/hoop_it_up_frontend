@@ -5,12 +5,12 @@
 }
 
 div.home {
-  padding-top: 30px;
-  display: grid;
+  padding-top: 20px;
+  display: block;
 }
 
 .App-header {
-  background-image: url("./images/basketball_court.png");
+  background-image: url("./images/court.jpg");
   background-position: center;
   background-color: black;
   background-size: cover;
@@ -35,6 +35,7 @@ div.userscontainer {
 }
 
 h3.navlink {
+  
   font-size: 15px;
   position: fixed;
   top: -5px;
@@ -49,25 +50,88 @@ h3.navlink {
 
 
 div#map {
-  top: 540px;
+  top: 465px;
   position: absolute;
-  height: 350px; 
-  width: 50%;
-  margin-left: 25%;
+  height: 45%; 
+  width: 70%;
+  margin-left: 15%;
   background-color: black;
   display: none; 
 }
 
 #mapcontainer {
   position: relative;
+  top: 50%;
   
 }
 
-html {
+#welcome {
   background-color: black;
+  width: 30%;
+  margin: auto;
+  border-color: yellow;
+  border-style: ridge;
+  opacity: .9;
 }
 
-div#navi {
-  color: darkorange;
-  font-size: bold;
+#welcome a{
+  text-decoration: none;
+}
+
+#welcome a:hover{
+  background-color: yellowgreen;
+}
+
+div#navi a{
+  position: relative;
+  text-decoration: none;
+  color:limegreen;
+  font-style: oblique;
+  font-weight: bold;
+  background-color: grey;
+  opacity: .6;
+  border-style: double;
+  border-color: green;
+}
+
+.playercard {
+  position: relative;
+  top:90px;
+  border: yellowgreen;
+  border-style: ridge;
+  width:60%;
+  margin:auto;
+  background: black;
+  padding-bottom: 10px;
+  
+}
+
+#formcard {
+  color:black ;
+  
+}
+
+#nickname {
+
+}
+#stats {
+  color:goldenrod;
+  flood-opacity: -50%;
+}
+
+
+
+#login {
+  text-shadow: seashell;
+  font-weight: lighter;
+  position: relative;
+  top: 65px;
+  color: yellow;
+}
+
+#court_title {
+  color: black;
+  background-color: grey;
+  opacity: .8;
+  
 }

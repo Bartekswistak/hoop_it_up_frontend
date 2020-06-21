@@ -52,9 +52,11 @@ function callback(results, status) {
           position: place.geometry.location
         });
 
+        
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
+          infowindow.setContent(place.name + "<br>" + place.vicinity + "<br>"+ "Check it Out") ;
           infowindow.open(map, this);
+          // debugger
         });
       }
   </script>   

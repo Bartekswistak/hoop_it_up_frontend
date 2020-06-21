@@ -7,7 +7,7 @@ const AppHeader = () => {
 
 return(
 	<div id="login">
-		<h3><NavLink to="/login">Log In</NavLink> Or <NavLink to="/signup">Sign Up</NavLink></h3>
+		<h3 id="welcome"><NavLink to="/login">Log In</NavLink> Or <NavLink to="/signup">Sign Up</NavLink></h3>
         <div id="content">
           <Route path="/login"  component={Login}/>
           <Route path="/signup" component={Signup}/>
