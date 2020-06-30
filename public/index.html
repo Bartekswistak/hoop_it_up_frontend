@@ -12,11 +12,11 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM&libraries=places&callback=initMap" async defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM&libraries=places&callback=initMap" async defer></script> -->
 
     <title>Hoop It Up</title>
 
-    <script >
+    <!-- <script >
       var map;
       var service;
       var infowindow;
@@ -54,12 +54,12 @@ function callback(results, status) {
 
         
         google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name + "<br>" + place.vicinity + "<br>"+ "Check it Out") ;
+          infowindow.setContent(place.name + "<br>" + place.vicinity + "<br>"+ `<a href="courtpage" id="courtpage"> Check it Out </a>`) ;
           infowindow.open(map, this);
           // debugger
         });
       }
-  </script>   
+  </script>    -->
   </head>
   <body>
 

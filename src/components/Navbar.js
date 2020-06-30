@@ -2,7 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Route, Link} from "react-router-dom";
 import Logout from './Logout.js'
+// import MapContainer from '../containers/MapContainer.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
+
 import GoogleMap from './GoogleMap.js'
 
  const NavBar = ({currentUser}) => {

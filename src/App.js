@@ -6,7 +6,6 @@ import { fetchUsers } from './actions/fetchUsers.js'
 import {BrowserRouter as Router} from 'react-router-dom'
 import Home from './components/Home.js'
 import NavBar from './components/Navbar.js'
-import ball from './images/basketball_court.png'
 
 class App extends React.Component {
 
@@ -17,7 +16,6 @@ class App extends React.Component {
   render(){
       return (
           <div className="App">
-            {/* <img src={ball} id="ball"></img> */}
             <header className="App-header"> 
             
               <Router>

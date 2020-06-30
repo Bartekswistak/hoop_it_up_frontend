@@ -49,14 +49,25 @@ h3.navlink {
 }
 
 
-div#map {
+/* div#map {
   top: 465px;
   position: absolute;
   height: 45%; 
   width: 70%;
-  margin-left: 15%;
-  background-color: black;
-  display: none; 
+  margin-left: 15%; 
+   background-color: black; 
+   display: none;  
+} */
+
+div.search {
+  position: absolute;
+  top: 390px;
+  margin-left: 45%;
+}
+
+button.locate {
+  position: absolute;
+  top: 95%;
 }
 
 #mapcontainer {
@@ -110,10 +121,10 @@ div#navi a{
   color:black ;
   
 }
-
+/* 
 #nickname {
 
-}
+} */
 #stats {
   color:goldenrod;
   flood-opacity: -50%;
@@ -134,4 +145,12 @@ div#navi a{
   background-color: grey;
   opacity: .8;
   
+}
+
+h2, p {
+  color: black;
+}
+
+p#subtitle{
+  color: white;
 }
