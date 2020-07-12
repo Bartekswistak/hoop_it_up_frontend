@@ -66,10 +66,6 @@ div.search {
   margin-left: 45%;
 }
 
-button.locate {
-  position: absolute;
-  top: 95%;
-}
 
 #mapcontainer {
   position: relative;
@@ -122,10 +118,7 @@ div#navi a{
   color:black ;
   
 }
-/* 
-#nickname {
 
-} */
 #stats {
   color:goldenrod;
   flood-opacity: -50%;
@@ -162,4 +155,29 @@ div#infowindow {
 
 h1 {
   color: white;
+}
+
+div.suggestions {
+  color: black;
+  width:30%;
+  margin-left: 33%;
+  font-size: medium;
+  position: relative;
+  bottom: 20px;
+  background-color: white;
+
+}
+
+input#placesearch {
+  top:32%;
+  position: relative;
+  width:20%;
+
+}
+
+button.locate {
+  position: absolute;
+  bottom: 2%;
+  left:42%;
+  width:15%;
 }

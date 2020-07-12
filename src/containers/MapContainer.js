@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { GoogleApiWrapper } from 'google-maps-react';
 import CurrentLocation from '../components/Map';
 
+
 export class MapContainer extends Component {
+
   
   render() {
     return (
+    <div>
+
       <CurrentLocation
         centerAroundCurrentLocation
         google={this.props.google}
-      >
+      > 
       </CurrentLocation>
+  </div>
     );
   }
 }

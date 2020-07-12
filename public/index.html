@@ -12,58 +12,14 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM&libraries=places&callback=initMap" async defer></script> -->
-
     <title>Hoop It Up</title>
 
-    <!-- <script >
-      var map;
-      var service;
-      var infowindow;
-
-function initMap() {
-  var venice = new google.maps.LatLng(27.097643, -82.442617);
-
-  infowindow = new google.maps.InfoWindow();
-
-  map = new google.maps.Map(
-      document.getElementById('map'), {center: venice, zoom: 10});
-
-      var request = {
-    location: venice,
-    radius: '50000',
-    name: ['basketball court']
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
-}
- 
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
-  }
-}
-      function createMarker(place) {
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location
-        });
-
-        
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name + "<br>" + place.vicinity + "<br>"+ `<a href="courtpage" id="courtpage"> Check it Out </a>`) ;
-          infowindow.open(map, this);
-          // debugger
-        });
-      }
-  </script>    -->
+   
   </head>
   <body>
-
+    
     <div id="root"> </div>
+  
     <div id="map"></div>  
 
   </body>

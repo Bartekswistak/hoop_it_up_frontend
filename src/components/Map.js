@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { InfoWindow, Marker } from 'google-maps-react';
 import mapStyles from "./mapStyles";
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import useOnclickOutside from 'react-cool-onclickoutside';
+
 
 
 const mapContainerStyle = {
@@ -18,6 +21,7 @@ const options = {
   styles: mapStyles,
   zoomControl: true,
 };
+
 
 export class CurrentLocation extends React.Component {
 
@@ -98,8 +102,7 @@ export class CurrentLocation extends React.Component {
 
       // maps.Map() is constructor that instantiates the map
       this.map = new maps.Map(node, mapConfig);
-
-      // This is the nearbySearch function to display all the markers
+      // This is the nearbySearch function to display all the markers  
 
       const request = {
         location: center,
@@ -125,25 +128,122 @@ export class CurrentLocation extends React.Component {
       });
 
       let infowindow = new this.props.google.maps.InfoWindow({
-        content:{
-          name: place.name,
-          vicinity: place.vicinity
-        }
-        
-   });  
+        name: place.name,
+        vicinity: place.vicinity
+      });  
 
       marker.addListener("click", function() {
+
+    
+
+        let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div> `
       
-        console.log(infowindow)
-        infowindow.setContent(`<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>`)
-        infowindow.open(this.map, marker)
-            
-      })
-        
+        // console.log(infowindow)
+        infowindow.setContent(contentString)
+        infowindow.open(this.map, marker)          
+      })       
       }
     }
+
+    Locate = () => {
+      
+      const map = this.props.google.maps.Map
+     
+      return (
+        <button 
+          className="locate"
+          onClick={() => {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                this.map.panTo({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                });
+              },
+              () => null
+            );
+          }}
+        > Back to my Location
+        </button>
+      );
+    }
+
+    PlacesAutocomplete = () => {
+
+      const map = this.props.google.maps.Map
+
+      const {
+        ready,
+        value,
+        suggestions: { status, data },
+        setValue,
+        clearSuggestions
+      } = usePlacesAutocomplete({
+        requestOptions: {  },
+        debounce: 300
+      });
+      const registerRef = useOnclickOutside(() => {
+        // When user clicks outside of the component, we can dismiss
+        // the searched suggestions by calling this method
+        clearSuggestions();
+      });
     
-  
+      const handleInput = e => {
+        // Update the keyword of the input element
+        setValue(e.target.value);
+      };
+    
+      const handleSelect = ({ description }) => () => {
+        // When user selects a place, we can replace the keyword without request data from API
+        // by setting the second parameter as "false"
+        setValue(description, false);
+        clearSuggestions();
+    
+        // Get latitude and longitude via utility functions
+        getGeocode({ address: description })
+          .then(results => getLatLng(results[0]))
+          .then(({ lat, lng }) => {
+            this.map.panTo({lat, lng})
+            console.log('📍 Coordinates: ', { lat, lng });
+          })
+          }
+      
+      const renderSuggestions = () =>
+        data.map(suggestion => {
+          const {
+            id,
+            structured_formatting: { main_text, secondary_text }
+          } = suggestion;
+    
+          return (
+            <div
+              class="suggestions"
+              key={id}
+              onClick={handleSelect(suggestion)}
+            >
+              - {main_text} {secondary_text} -
+            </div>
+          );
+        });
+    
+      return (
+        <div ref={registerRef}>
+          <input
+            id="placesearch"
+            value={value}
+            onChange={handleInput}
+            disabled={!ready}
+            placeholder="Search for courts around the world"
+          />
+          {/* We can use the "status" to decide whether we should display the dropdown or not */}
+          {status === 'OK' && <ul>{renderSuggestions()}</ul>}
+        </div>
+      );
+    };
+    
+
+
+
  renderChildren() {
     const { children } = this.props;
     if (!children) return;
@@ -154,6 +254,7 @@ export class CurrentLocation extends React.Component {
         map: this.map,
         google: this.props.google,
         mapCenter: this.state.currentLocation,
+        
       });
       
     });
@@ -163,11 +264,19 @@ export class CurrentLocation extends React.Component {
     const style = Object.assign({}, mapContainerStyle.map);
    return (  
      <div>
+           <this.PlacesAutocomplete/>
+
        <div style={style} ref="map">
          Loading map...
+       </div> 
+
+        {this.renderChildren()}
+        {this.Locate()}
+        
+
        </div>
-       {this.renderChildren()}
-     </div>
+             
+
    );
  }
 
