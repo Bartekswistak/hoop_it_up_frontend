@@ -67,10 +67,10 @@ export default [
       elementType: "all",
       stylers: [
         {
-          saturation: -100,
+          saturation: 0,
         },
         {
-          lightness: 45,
+          lightness: 15,
         },
       ],
     },

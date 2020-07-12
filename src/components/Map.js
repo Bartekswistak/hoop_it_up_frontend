@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import mapStyles from "./mapStyles";
 
-const mapStyles = {
+
+const mapContainerStyle = {
   map: {
-    position: 'absolute',
-    top: "325px",
-    align: 'center',
-    width: '100%',
-    height: '55%'
+    top: "435px",
+    position: "absolute",
+    height: "45%", 
+    width: "70%",
+    left: "15%"
   }
+};
+
+const options = {
+  styles: mapStyles,
+  zoomControl: true,
 };
 
 export class CurrentLocation extends React.Component {
@@ -83,19 +91,61 @@ export class CurrentLocation extends React.Component {
         {},
         {
           center: center,
-          zoom: zoom
+          zoom: zoom,
+          options: options
         }
       );
 
       // maps.Map() is constructor that instantiates the map
       this.map = new maps.Map(node, mapConfig);
-    }
-  }
 
+      // This is the nearbySearch function to display all the markers
+
+      const request = {
+        location: center,
+        radius: '50000',
+        name: ['basketball court']
+      }
+
+      const service = new google.maps.places.PlacesService(this.map);
+
+      service.nearbySearch(request, function(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);  
+          }
+        }
+      });
+    } 
+    const createMarker= (place) => {
+      let marker = new this.props.google.maps.Marker({
+        map: this.map,
+        position: place.geometry.location,
+        title: place.name
+      });
+
+      let infowindow = new this.props.google.maps.InfoWindow({
+        content:{
+          name: place.name,
+          vicinity: place.vicinity
+        }
+        
+   });  
+
+      marker.addListener("click", function() {
+      
+        console.log(infowindow)
+        infowindow.setContent(`<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>`)
+        infowindow.open(this.map, marker)
+            
+      })
+        
+      }
+    }
+    
   
  renderChildren() {
     const { children } = this.props;
-
     if (!children) return;
 
     return React.Children.map(children, c => {
@@ -103,14 +153,15 @@ export class CurrentLocation extends React.Component {
       return React.cloneElement(c, {
         map: this.map,
         google: this.props.google,
-        mapCenter: this.state.currentLocation
+        mapCenter: this.state.currentLocation,
       });
+      
     });
   }
 
   render() {
-    const style = Object.assign({}, mapStyles.map);
-   return (
+    const style = Object.assign({}, mapContainerStyle.map);
+   return (  
      <div>
        <div style={style} ref="map">
          Loading map...
@@ -125,7 +176,7 @@ export class CurrentLocation extends React.Component {
 export default CurrentLocation;
 
 CurrentLocation.defaultProps = {
-  zoom: 12,
+  zoom: 10,
   initialCenter: {
     lat: 27.097643,
     lng: -82.442617

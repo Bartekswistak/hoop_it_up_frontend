@@ -1,26 +1,11 @@
-
 import React from "react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import { formatRelative } from "date-fns";
-
+import {GoogleMap, useLoadScript, Marker, InfoWindow,} from "@react-google-maps/api";
+import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete";
+import {Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption,} from "@reach/combobox";
+import { formatRelative } from "date-fns"; 
 import "@reach/combobox/styles.css";
 import mapStyles from "./mapStyles";
+
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -32,7 +17,6 @@ const mapContainerStyle = {
 };
 const options = {
   styles: mapStyles,
-  disableDefaultUI: true,
   zoomControl: true,
 };
 const center = {
@@ -48,20 +32,58 @@ export default function CourtMap() {
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
+  // const onMapClick = React.useCallback((e) => {
+  //   setMarkers((current) => [
+  //     ...current,
+  //     {
+  //       lat: e.latLng.lat(),
+  //       lng: e.latLng.lng(),
+  //       time: new Date(),
+  //     },
+  //   ]);
+  // }, []);
 
   const mapRef = React.useRef();
+  
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
+//      debugger
+
+//     const google = this.maps 
+    
+//     const service = new google.maps.places.PlacesService(map);
+
+//     const request = {
+//       // location: venice,
+//       radius: '50000',
+//       name: ['basketball court']
+//     }
+
+//   service.nearbySearch(request, function(results, status) {
+//         if (status === google.maps.places.PlacesServiceStatus.OK) {
+//           for (var i = 0; i < results.length; i++) {
+//             this.createMarker(results[i]);
+//           }
+
+//         //   map.setCenter(results[0].geometry.location);
+//         }
+//       });
+
+
+// //     }
+
+//     const createMarker= (place) => {
+//         let marker = new this.props.google.maps.Marker({
+//           map: this.map,
+//           position: place.geometry.location
+//         });
+        
+//         this.props.google.maps.event.addListener(marker, 'click', function() {
+//             this.infowindow.setContent(place.name);
+//             this.infowindow.open(this.map, this);
+//           });
+//         }
+
   }, []);
 
   const panTo = React.useCallback(({ lat, lng }) => {
@@ -87,23 +109,16 @@ export default function CourtMap() {
         zoom={10}
         center={center}
         options={options}
-        onClick={onMapClick}
+        // onClick={onMapClick}
         onLoad={onMapLoad}
       >
         {markers.map((marker) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
             position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-            // Change this icon to a basketball to see courts near me
-            icon={{
-              url: `/bear.svg`,
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(30, 30),
-            }}
+            // onClick={() => {
+            //   setSelected(marker);
+            // }}
           />
         ))}
 
@@ -161,8 +176,6 @@ function Search({ panTo }) {
     },
   });
 
-  // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-
   const handleInput = (e) => {
     setValue(e.target.value);
   };
@@ -187,7 +200,7 @@ function Search({ panTo }) {
           value={value}
           onChange={handleInput}
           disabled={!ready}
-          placeholder="Search your location"
+          placeholder="Search a location"
         />
         <ComboboxPopover>
           <ComboboxList>

@@ -2,10 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Route, Link} from "react-router-dom";
 import Logout from './Logout.js'
-// import MapContainer from '../containers/MapContainer.js'
+import MapContainer from '../containers/MapContainer.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 
-import GoogleMap from './GoogleMap.js'
+import CourtMap from './CourtMap.js'
 
  const NavBar = ({currentUser}) => {
 
@@ -22,7 +22,9 @@ import GoogleMap from './GoogleMap.js'
           <Link to={"/courts"}>Find Courts</Link>
           </div>
           <Route path={`/myplayercard/`} component={PlayerCardContainer}/> 
-          <Route path={`/courts`} component={GoogleMap} />
+          {/* <Route path={`/courts`} component={CourtMap} /> */}
+          <Route path={`/courts`} component={MapContainer} />
+
           
           {!!currentUser ? <Logout/> : null}
        </div>

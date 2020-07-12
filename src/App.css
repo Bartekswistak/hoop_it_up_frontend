@@ -27,6 +27,7 @@ div.home {
 }
 
 div.userscontainer {
+  color:white;
   font-size: 15px;
   font-weight: bold;
   position: fixed;
@@ -35,7 +36,7 @@ div.userscontainer {
 }
 
 h3.navlink {
-  
+  color: white;
   font-size: 15px;
   position: fixed;
   top: -5px;
@@ -152,5 +153,13 @@ h2, p {
 }
 
 p#subtitle{
+  color: white;
+}
+
+div#infowindow {
+  color: black;
+}
+
+h1 {
   color: white;
 }
