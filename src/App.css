@@ -49,17 +49,6 @@ h3.navlink {
   left: 125px;
 }
 
-
-/* div#map {
-  top: 465px;
-  position: absolute;
-  height: 45%; 
-  width: 70%;
-  margin-left: 15%; 
-   background-color: black; 
-   display: none;  
-} */
-
 div.search {
   position: absolute;
   top: 390px;
@@ -180,4 +169,8 @@ button.locate {
   bottom: 2%;
   left:42%;
   width:15%;
+}
+
+button.findcourts {
+  visibility: hidden;
 }

@@ -45,8 +45,7 @@ export class CurrentLocation extends React.Component {
           this.recenterMap();
         }
       }
-
-      
+    
  recenterMap() {
     const map = this.map;
     const current = this.state.currentLocation;
@@ -96,22 +95,37 @@ export class CurrentLocation extends React.Component {
         {
           center: center,
           zoom: zoom,
-          options: options
+          options: options,
         }
       );
 
       // maps.Map() is constructor that instantiates the map
       this.map = new maps.Map(node, mapConfig);
-      // This is the nearbySearch function to display all the markers  
+      // This is the nearbySearch function to display all the markers
+      this.searchCourts()
+       
+      //this does the searchCourts() function and map dragend by clicking the button.
+            maps.event.addListener(this.map, "dragend", function() {
+              var button = document.querySelector("#root > div > header > div.NavBar > div:nth-child(3) > div:nth-child(1) > div > button.findcourts")
+              button.click()
+            })
+      }
+    }
+
+   searchCourts = () => {
+      const map = this.props.google.maps.Map
+      const { google } = this.props;
+      const maps = google.maps;
 
       const request = {
-        location: center,
+        location: this.map.getCenter(),
         radius: '50000',
         name: ['basketball court']
       }
 
-      const service = new google.maps.places.PlacesService(this.map);
+    const service = new google.maps.places.PlacesService(this.map);
 
+  // ACTUAL SEARCH FOR COURTS
       service.nearbySearch(request, function(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
@@ -119,7 +133,8 @@ export class CurrentLocation extends React.Component {
           }
         }
       });
-    } 
+
+      // MARKERS TO BE DROPPED 
     const createMarker= (place) => {
       let marker = new this.props.google.maps.Marker({
         map: this.map,
@@ -134,21 +149,16 @@ export class CurrentLocation extends React.Component {
 
       marker.addListener("click", function() {
 
-    
-
         let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div> `
       
-        // console.log(infowindow)
         infowindow.setContent(contentString)
         infowindow.open(this.map, marker)          
       })       
       }
+
     }
 
     Locate = () => {
-      
-      const map = this.props.google.maps.Map
-     
       return (
         <button 
           className="locate"
@@ -168,8 +178,19 @@ export class CurrentLocation extends React.Component {
       );
     }
 
-    PlacesAutocomplete = () => {
+    FindCourts = () => {     
+      return (
+        <button 
+          className="findcourts"
+          onClick={() => {
+            this.searchCourts()
+          }}
+        >Find Courts
+        </button>
+      );
+    }
 
+    PlacesAutocomplete = () => {
       const map = this.props.google.maps.Map
 
       const {
@@ -204,6 +225,7 @@ export class CurrentLocation extends React.Component {
           .then(results => getLatLng(results[0]))
           .then(({ lat, lng }) => {
             this.map.panTo({lat, lng})
+            this.searchCourts()
             console.log('📍 Coordinates: ', { lat, lng });
           })
           }
@@ -217,7 +239,7 @@ export class CurrentLocation extends React.Component {
     
           return (
             <div
-              class="suggestions"
+              className="suggestions"
               key={id}
               onClick={handleSelect(suggestion)}
             >
@@ -241,46 +263,38 @@ export class CurrentLocation extends React.Component {
       );
     };
     
-
-
-
  renderChildren() {
-    const { children } = this.props;
+    const { children } = this.props;    
     if (!children) return;
 
     return React.Children.map(children, c => {
       if (!c) return;
+      
       return React.cloneElement(c, {
         map: this.map,
         google: this.props.google,
         mapCenter: this.state.currentLocation,
-        
       });
-      
     });
   }
 
   render() {
-    const style = Object.assign({}, mapContainerStyle.map);
+    const style = Object.assign({}, mapContainerStyle.map); 
    return (  
      <div>
            <this.PlacesAutocomplete/>
-
-       <div style={style} ref="map">
+       <div 
+       style={style} 
+       ref="map"
+       >
          Loading map...
        </div> 
-
         {this.renderChildren()}
         {this.Locate()}
-        
-
+        {this.FindCourts()}
        </div>
-             
-
    );
  }
-
-
 }
 export default CurrentLocation;
 
