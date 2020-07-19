@@ -1,5 +1,4 @@
 import React from 'react'
-// import {NavLink} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import UsersContainer from '../containers/UsersContainer'
 
@@ -7,12 +6,11 @@ const Home = () => {
 
     return ( 
         <Container>
-            {/* <NavLink to="/">Home </NavLink> */}
              <div className="userscontainer"> <UsersContainer/> </div>
             
             <div className= "home">
-                <h1>Welcome to Hoop it Up</h1>
-                <p id="subtitle">Finding quality pickup games in your area since 2019</p>             
+                <h1 id="title">Hoop it Up</h1>
+                <p id="subtitle">FINDING QUALITY PICK UP GAMES IN YOUR AREA</p>             
             </div>
         </Container>
     )

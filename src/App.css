@@ -1,25 +1,32 @@
-.App {
-  text-align: center;
-  background-color: black;
-  position: relative;
+.App-header {
+  background-image: url("./images/background-sunset.jpg");
+  background-size: cover;
+  min-height: 100vh;
 }
 
 div.home {
-  padding-top: 20px;
-  display: block;
+  padding-top: 20px;  
+  height: 300px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.54) 0%, rgba(0,0,0,0) 100%);
+  width: 100%;
+  text-align: center;
+  align-items: center;
 }
 
-.App-header {
-  background-image: url("./images/court.jpg");
-  background-position: center;
-  background-color: black;
-  background-size: cover;
-  min-height: 100vh;
-  flex-direction: column;
+div.container {
+  width: 100%;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+
+h1#title{
+  font-size: 167px;
+  font-weight: lighter;
+  color:  #FCCD89;
+  height: 25%;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 8%;
+  font-family: TheHistoriaDemo;
 }
 
 .App-link {
@@ -27,26 +34,21 @@ div.home {
 }
 
 div.userscontainer {
-  color:white;
-  font-size: 15px;
   font-weight: bold;
   position: fixed;
-  top: 10px;
-  right: 10px;
-}
-
-h3.navlink {
-  color: white;
-  font-size: 15px;
-  position: fixed;
-  top: -5px;
-  left: 15px;
+  top: 25px;
+  left: 10px;
+  color: #FFFFFF;
+  font-size: 16px;
+  letter-spacing: 1.78px;
+  line-height: 19px;
+  text-align: center;
 }
 
 .logout {
   position: fixed;
-  top: 10px;
-  left: 125px;
+  top:125px;
+  right: 25px;
 }
 
 div.search {
@@ -55,52 +57,84 @@ div.search {
   margin-left: 45%;
 }
 
-
 #mapcontainer {
   position: relative;
   top: 50%;
   
 }
 
-#welcome {
-  background-color: black;
-  width: 30%;
-  margin: auto;
-  border-color: yellow;
-  border-style: ridge;
-  opacity: .9;
+h3#welcome {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  height: 5%;
+  width: 20%;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1.78px;
+  line-height: 19px;
+ 
+}
+
+h3.navlink {
+  position: fixed;
+  top: 10px;
+  right: -80px;
+  height: 5%;
+  width: 20%;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1.78px;
+  line-height: 19px;
+ 
 }
 
 #welcome a{
   text-decoration: none;
+  color: white;
+} 
+
+div#content {
+  margin-top: 130px;
+  width:50%;
+  margin-left: 45%;
 }
 
-#welcome a:hover{
-  background-color: yellowgreen;
+div#navi {
+  position: absolute;
+  top:65px;
+  right: 25px;
+ 
 }
 
-div#navi a{
-  position: relative;
+div#navi a {
   text-decoration: none;
-  color:limegreen;
-  font-style: oblique;
-  font-weight: bold;
-  background-color: grey;
-  opacity: .6;
-  border-style: double;
-  border-color: green;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  letter-spacing: 1.78px;
+  line-height: 19px;
 }
 
 .playercard {
   position: relative;
+  text-align: center;
   top:90px;
-  border: yellowgreen;
-  border-style: ridge;
-  width:60%;
+  width: 25%;
   margin:auto;
-  background: black;
+  background: gray;
   padding-bottom: 10px;
   
+}
+
+div#form {
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 150px;
+  text-align: center;
+  background: gray;
 }
 
 #formcard {
@@ -109,19 +143,10 @@ div#navi a{
 }
 
 #stats {
-  color:goldenrod;
+  color:black;
   flood-opacity: -50%;
 }
 
-
-
-#login {
-  text-shadow: seashell;
-  font-weight: lighter;
-  position: relative;
-  top: 65px;
-  color: yellow;
-}
 
 #court_title {
   color: black;
@@ -135,16 +160,23 @@ h2, p {
 }
 
 p#subtitle{
-  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  height: 103px;
+  width: 583px;
+  margin-left: 27%;
+  color: #000A0A;
+  font-family: Montserrat;
+  font-size: 30px;
+  letter-spacing: 3.33px;
+  line-height: 40px;
+  text-align: center;
 }
 
 div#infowindow {
   color: black;
 }
 
-h1 {
-  color: white;
-}
 
 div.suggestions {
   color: black;
@@ -152,16 +184,16 @@ div.suggestions {
   margin-left: 33%;
   font-size: medium;
   position: relative;
-  bottom: 20px;
+  top: 20px;
   background-color: white;
 
 }
 
 input#placesearch {
-  top:32%;
-  position: relative;
+  top:45%;
+  position: absolute;
   width:20%;
-
+  margin-left: 40%;
 }
 
 button.locate {

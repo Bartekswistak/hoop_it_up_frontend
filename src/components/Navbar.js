@@ -5,7 +5,7 @@ import Logout from './Logout.js'
 import MapContainer from '../containers/MapContainer.js'
 import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 
-import CourtMap from './CourtMap.js'
+// import CourtMap from './CourtMap.js'
 
  const NavBar = ({currentUser}) => {
 
@@ -18,8 +18,8 @@ import CourtMap from './CourtMap.js'
         <h3 className="navlink">Welcome {currentUser.username}</h3>
           <div id="navi">
 
-         <Link to={`/myplayercard`} onClick={handleClick}> My Player Card</Link><span>    </span>
-          <Link to={"/courts"}>Find Courts</Link>
+         <Link to={`/myplayercard`} onClick={handleClick}> -My Player Card-</Link><span> <br></br>   </span>
+          <Link to={"/courts"}>-Find Courts-</Link>
           </div>
           <Route path={`/myplayercard/`} component={PlayerCardContainer}/> 
           {/* <Route path={`/courts`} component={CourtMap} /> */}

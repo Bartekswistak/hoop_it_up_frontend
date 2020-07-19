@@ -10,4 +10,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+   
+  }
+
+  @font-face {
+    font-family: 'TheHistoriaDemo';
+    src: local('TheHistoriaDemo'), url(./fonts/TheHistoriaDemo.ttf) format('truetype');
+  }

@@ -27,7 +27,7 @@ class PlayerCard extends React.Component {
         if (!this.state.clicked) {
     return(
         <div className="playercard">
-            <h3 id="nickname">Nickname on the Court: {this.props.currentUser.playercard.player_nickname}</h3>
+            <h3 id="nickname">Nickname: {this.props.currentUser.playercard.player_nickname}</h3>
           <div id="stats">
             Height: {this.props.currentUser.playercard.player_height_in_feet} feet {this.props.currentUser.playercard.player_height_in_inches} inches
             <br></br>

@@ -40,8 +40,9 @@
    
 //   }, []);
 
-// function FindCourts(props){
-//   // debugger
+// function searchCourts(){
+// //   debugger
+
 //      let map = new this.props.google.maps
     
 //      // debugger
@@ -70,7 +71,7 @@
 
 // //     }
 
-//     const createMarker= (place) => {
+//     function createMarker(place)  {
 //         let marker = new this.props.google.maps.Marker({
 //           map: this.map,
 //           position: place.geometry.location
@@ -99,7 +100,7 @@
 //       <h1>
 //         Basketball Courts{" "}
 //       </h1>
-
+//         <FindCourts/>
 //       <Locate panTo={panTo} />
 //       <Search panTo={panTo} />
       
@@ -110,16 +111,16 @@
 //         zoom={10}
 //         center={center}
 //         options={options}
-//         // onClick={onMapClick}
-//         onLoad={onMapLoad, FindCourts}
+//         onDragEnd={searchCourts}
+//         onLoad={onMapLoad}
 //       >
 //         {markers.map((marker) => (
 //           <Marker
 //             key={`${marker.lat}-${marker.lng}`}
 //             position={{ lat: marker.lat, lng: marker.lng }}
-//             // onClick={() => {
-//             //   setSelected(marker);
-//             // }}
+//             onClick={() => {
+//               setSelected(marker);
+//             }}
 //           />
 //         ))}
 
@@ -142,6 +143,21 @@
 //     </div>
 //   );
 // }
+
+// function FindCourts() {     
+//     return (
+//       <button 
+//         className="findcourts"
+//         onClick={() => {
+//           this.searchCourts()
+//         }}
+//       >Find Courts
+//       </button>
+//     );
+//   }
+
+
+
 
 // function Locate({ panTo }) {
 //   return (

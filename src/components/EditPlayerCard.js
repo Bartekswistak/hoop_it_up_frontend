@@ -43,7 +43,7 @@ class EditPlayerCard extends React.Component {
 
     return ( 
       
-      <div>
+      <div id="form">
         <form onSubmit= {this.handleSubmit}> 
 
        <h1>Edit Your PlayerCard</h1>

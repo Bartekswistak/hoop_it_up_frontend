@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { InfoWindow, Marker } from 'google-maps-react';
+// import { InfoWindow, Marker } from 'google-maps-react';
 import mapStyles from "./mapStyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
-
 
 
 const mapContainerStyle = {
@@ -130,33 +129,103 @@ export class CurrentLocation extends React.Component {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);  
+            
           }
         }
       });
 
       // MARKERS TO BE DROPPED 
     const createMarker= (place) => {
-      let marker = new this.props.google.maps.Marker({
+
+      var markers = []
+      var infoWindows = []
+
+      var marker = new this.props.google.maps.Marker({
         map: this.map,
         position: place.geometry.location,
-        title: place.name
+        title: place.name,
+        placeId: place.place_id
       });
 
-      let infowindow = new this.props.google.maps.InfoWindow({
+      var infowindow = new this.props.google.maps.InfoWindow({
         name: place.name,
-        vicinity: place.vicinity
+        vicinity: place.vicinity,
+        placeId: place.place_id
       });  
+
+
+
+
+      
+
+
+      
+      markers.push(marker)
+      infoWindows.push(infowindow)
+
+
+
 
       marker.addListener("click", function() {
 
-        let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div> `
-      
+        let learnMoreString = `<p> <a id="courtpage" href="#" onClick={`+ getMoreInfo() + `}> Click here for more info </a> </p>`
+        
+        let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>   
+                                <div>
+                                 `+ learnMoreString + `
+                                </div>
+                                  `
+                                  
+        
+                            
+                                  
+        function getMoreInfo () {
+          var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+          targetUrl = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.place_id}&key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM`
+ 
+          let url;
+
+          fetch(proxyUrl + targetUrl)
+          .then(result => result.json())
+              .then(jsondata => {
+                url = jsondata.result.url
+                console.log(url)
+
+                window.open(url)
+                
+            }).catch(err => console.error(err));
+          } 
+                 
+          // learnMore.addListener("click", function(){
+          //   debugger
+          // }
+        // )
+
         infowindow.setContent(contentString)
-        infowindow.open(this.map, marker)          
-      })       
+        
+  
+        infowindow.open(map, this) 
+
+        // debugger
+
+        // window.document.getElementById("courtpage").addListener("click", function(){
+        //   debugger
+        // })
+      
+
+
+      function closeAllInfoWindows() {
+          for (var i=0;i<infoWindows.length;i++) {
+              infoWindows[i].close();
+          }
       }
 
+      google.maps.event.addListener(this.map, 'click', closeAllInfoWindows);
+     
+      })  
+   
     }
+  }
 
     Locate = () => {
       return (
@@ -189,6 +258,7 @@ export class CurrentLocation extends React.Component {
         </button>
       );
     }
+    
 
     PlacesAutocomplete = () => {
       const map = this.props.google.maps.Map
@@ -295,7 +365,62 @@ export class CurrentLocation extends React.Component {
        </div>
    );
  }
+
+// I want to try to different style to render 
+
+// render() {
+//   return (
+//     <div>
+
+    
+//     <GoogleMap
+//             id="map"
+//             mapContainerStyle={mapContainerStyle}
+//             zoom={10}
+//             // center={center}
+//             options={options}
+//             onDragEnd={this.searchCourts}
+//             onLoad={this.loadMap}
+//           >
+//             {markers.map((marker) => (
+//               <Marker
+//                 key={`${marker.lat}-${marker.lng}`}
+//                 position={{ lat: marker.lat, lng: marker.lng }}
+//                 onClick={() => {
+//                   setSelected(marker);
+//                 }}
+//               />
+//             ))}
+    
+//             {selected ? (
+//               <InfoWindow
+//                 position={{ lat: selected.lat, lng: selected.lng }}
+//                 onCloseClick={() => {
+//                   setSelected(null);
+//                 }}
+//               >
+//                 <div>
+//                   <h2>
+//                     This will be court information
+//                   </h2>
+//                   <p> {formatRelative(selected.time, new Date())}</p>
+//                 </div>
+//               </InfoWindow>
+//             ) : null}
+//           </GoogleMap>
+
+//         </div>
+
+//   )
+// }
+
 }
+
+
+
+
+
+
 export default CurrentLocation;
 
 CurrentLocation.defaultProps = {

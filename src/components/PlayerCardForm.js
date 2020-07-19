@@ -41,7 +41,7 @@ class PlayerCardForm extends React.Component {
 
     return ( 
       
-      <div>
+      <div id="form">
         <form onSubmit= {this.handleSubmit}> 
 
        <h1 id="formcard">Create Your PlayerCard</h1>
