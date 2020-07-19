@@ -144,7 +144,8 @@ export class CurrentLocation extends React.Component {
         map: this.map,
         position: place.geometry.location,
         title: place.name,
-        placeId: place.place_id
+        placeId: place.place_id,
+        place_url : place.url
       });
 
       var infowindow = new this.props.google.maps.InfoWindow({
@@ -154,64 +155,44 @@ export class CurrentLocation extends React.Component {
       });  
 
 
-
-
-      
-
-
-      
       markers.push(marker)
       infoWindows.push(infowindow)
 
+      
+      function getMoreInfo () {
+        var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+        targetUrl = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.place_id}&key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM`
 
+        let url;
 
+        fetch(proxyUrl + targetUrl)
+        .then(result => result.json())
+            .then(jsondata => {
+              place.url = jsondata.result.url              
+          }).catch(err => console.error(err));
+        } 
+
+      getMoreInfo();
 
       marker.addListener("click", function() {
 
-        let learnMoreString = `<p> <a id="courtpage" href="#" onClick={`+ getMoreInfo() + `}> Click here for more info </a> </p>`
+        let learnMoreString = `<p> <a id="courtpage" href=`+ place.url +` target="_blank"> View on Google </a> </p>`
         
         let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>   
                                 <div>
                                  `+ learnMoreString + `
                                 </div>
                                   `
-                                  
-        
-                            
-                                  
-        function getMoreInfo () {
-          var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-          targetUrl = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.place_id}&key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM`
- 
-          let url;
+                                                          
 
-          fetch(proxyUrl + targetUrl)
-          .then(result => result.json())
-              .then(jsondata => {
-                url = jsondata.result.url
-                console.log(url)
-
-                window.open(url)
-                
-            }).catch(err => console.error(err));
-          } 
-                 
-          // learnMore.addListener("click", function(){
-          //   debugger
-          // }
-        // )
-
-        infowindow.setContent(contentString)
-        
-  
+        infowindow.setContent(contentString)  
         infowindow.open(map, this) 
+// debugger
 
-        // debugger
 
-        // window.document.getElementById("courtpage").addListener("click", function(){
-        //   debugger
-        // })
-      
+
+
+
 
 
       function closeAllInfoWindows() {
