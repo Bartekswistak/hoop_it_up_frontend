@@ -56,23 +56,27 @@ class PlayerCardForm extends React.Component {
             <input type="integer"
               value={this.state.player_height_in_feet}
               name="player_height_in_feet" 
+              size="1" 
               onChange={this.handleChange}/> Feet
             <input type="integer" 
               value={this.state.player_height_in_inches}
               name="player_height_in_inches" 
+              size="1" 
               onChange={this.handleChange}/>Inches<br/>
         
           <label>How much do you weigh?</label>
             <input 
               type="integer" 
               value={this.state.player_weight}
-              name="player_weight" 
+              name="player_weight"
+              size="1"  
               onChange={this.handleChange}/>Lbs<br/>
        
        <label>How old are you?</label>
             <input type="integer"
               value={this.state.player_age} 
               name="player_age" 
+              size="1" 
               onChange={this.handleChange}/><br/>
        
           <label>Who is your favorite basketball player?</label>

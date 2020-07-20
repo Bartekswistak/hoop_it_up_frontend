@@ -26,7 +26,8 @@ render(){
     if (!this.state.clicked) {
     return(
       <div className="playercard">
-      <h3 id="nickname">Nickname: {this.props.playercard.playercard.player_nickname}</h3>
+      <h3 id="nickname"> {this.props.playercard.playercard.player_nickname}</h3>
+      <div id="card-image"></div>
     <div id="stats">
       Height: {this.props.playercard.playercard.player_height_in_feet} feet {this.props.playercard.playercard.player_height_in_inches} inches
       <br></br>

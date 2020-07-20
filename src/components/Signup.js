@@ -30,21 +30,21 @@ const Signup = ({signupFormData, updateSignupForm, signup, resetSignupForm, hist
         <input type="text" 
                 value={signupFormData.username} 
                 name="username" 
-                placeholder="username"
+                placeholder="Username"
                 onChange={handleChange}/> <br/>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
         <input type="text" 
                 value={signupFormData.email} 
                 name="email" 
-                placeholder="email"
+                placeholder="Email"
                 onChange={handleChange}/> <br/>
       </Form.Group>
         <Form.Group controlId="formBasicPassword">
         <input type="password" 
                 value={signupFormData.password} 
                 name="password" 
-                placeholder="password"
+                placeholder="Password"
                 onChange={handleChange}/> <br/>
          </Form.Group>
          <Form.Control className="loginButton"type="submit" value="Signup"/>

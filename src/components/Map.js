@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 import mapStyles from "./mapStyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
+import { de } from 'date-fns/locale';
 
 
 const mapContainerStyle = {
   map: {
-    top: "435px",
+    top: "400px",
     position: "absolute",
-    height: "45%", 
+    height: "55%", 
     width: "70%",
     left: "15%"
   }
@@ -104,10 +105,10 @@ export class CurrentLocation extends React.Component {
       this.searchCourts()
        
       //this does the searchCourts() function and map dragend by clicking the button.
-            maps.event.addListener(this.map, "dragend", function() {
-              var button = document.querySelector("#root > div > header > div.NavBar > div:nth-child(3) > div:nth-child(1) > div > button.findcourts")
-              button.click()
-            })
+        maps.event.addListener(this.map, "dragend", function() {
+          var button = document.querySelector("#root > div > header > div.NavBar > div:nth-child(3) > div:nth-child(1) > div > button.findcourts")
+          button.click()
+        })
       }
     }
 
@@ -134,7 +135,7 @@ export class CurrentLocation extends React.Component {
         }
       });
 
-      // MARKERS TO BE DROPPED 
+  // MARKERS TO BE DROPPED 
     const createMarker= (place) => {
 
       var markers = []
@@ -151,50 +152,42 @@ export class CurrentLocation extends React.Component {
       var infowindow = new this.props.google.maps.InfoWindow({
         name: place.name,
         vicinity: place.vicinity,
-        placeId: place.place_id
+        placeId: place.place_id,
+        place_url : place.url
       });  
-
 
       markers.push(marker)
       infoWindows.push(infowindow)
 
-      
       function getMoreInfo () {
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
         targetUrl = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.place_id}&key=AIzaSyBQ18PBDlXpg8MzVY-tDe1IK2KMdd3X-IM`
-
-        let url;
-
+        
         fetch(proxyUrl + targetUrl)
         .then(result => result.json())
             .then(jsondata => {
-              place.url = jsondata.result.url              
+              place.url = jsondata.result.url
+              // debugger
           }).catch(err => console.error(err));
         } 
+      
+      marker.addListener("mouseover", function(){
+        getMoreInfo();
+      })
 
-      getMoreInfo();
-
+      
       marker.addListener("click", function() {
-
-        let learnMoreString = `<p> <a id="courtpage" href=`+ place.url +` target="_blank"> View on Google </a> </p>`
         
         let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>   
                                 <div>
-                                 `+ learnMoreString + `
-                                </div>
-                                  `
+                                <p> <a id="courtpage" href=`+ place.url +` target="_blank" > View this court on Google </a> </p>
+                              </div>
+                            `
                                                           
-
-        infowindow.setContent(contentString)  
-        infowindow.open(map, this) 
-// debugger
-
-
-
-
-
-
-
+      infowindow.setContent(contentString)
+        
+      infowindow.open(this.map, marker) 
+      
       function closeAllInfoWindows() {
           for (var i=0;i<infoWindows.length;i++) {
               infoWindows[i].close();
@@ -202,9 +195,8 @@ export class CurrentLocation extends React.Component {
       }
 
       google.maps.event.addListener(this.map, 'click', closeAllInfoWindows);
-     
-      })  
-   
+      
+      })
     }
   }
 
@@ -306,7 +298,7 @@ export class CurrentLocation extends React.Component {
             value={value}
             onChange={handleInput}
             disabled={!ready}
-            placeholder="Search for courts around the world"
+            placeholder="Search a location"
           />
           {/* We can use the "status" to decide whether we should display the dropdown or not */}
           {status === 'OK' && <ul>{renderSuggestions()}</ul>}
@@ -333,7 +325,7 @@ export class CurrentLocation extends React.Component {
     const style = Object.assign({}, mapContainerStyle.map); 
    return (  
      <div>
-           <this.PlacesAutocomplete/>
+          
        <div 
        style={style} 
        ref="map"
@@ -343,63 +335,12 @@ export class CurrentLocation extends React.Component {
         {this.renderChildren()}
         {this.Locate()}
         {this.FindCourts()}
+
+         <this.PlacesAutocomplete/>
        </div>
    );
  }
-
-// I want to try to different style to render 
-
-// render() {
-//   return (
-//     <div>
-
-    
-//     <GoogleMap
-//             id="map"
-//             mapContainerStyle={mapContainerStyle}
-//             zoom={10}
-//             // center={center}
-//             options={options}
-//             onDragEnd={this.searchCourts}
-//             onLoad={this.loadMap}
-//           >
-//             {markers.map((marker) => (
-//               <Marker
-//                 key={`${marker.lat}-${marker.lng}`}
-//                 position={{ lat: marker.lat, lng: marker.lng }}
-//                 onClick={() => {
-//                   setSelected(marker);
-//                 }}
-//               />
-//             ))}
-    
-//             {selected ? (
-//               <InfoWindow
-//                 position={{ lat: selected.lat, lng: selected.lng }}
-//                 onCloseClick={() => {
-//                   setSelected(null);
-//                 }}
-//               >
-//                 <div>
-//                   <h2>
-//                     This will be court information
-//                   </h2>
-//                   <p> {formatRelative(selected.time, new Date())}</p>
-//                 </div>
-//               </InfoWindow>
-//             ) : null}
-//           </GoogleMap>
-
-//         </div>
-
-//   )
-// }
-
 }
-
-
-
-
 
 
 export default CurrentLocation;
