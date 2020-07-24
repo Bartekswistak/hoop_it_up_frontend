@@ -11,7 +11,7 @@ import PlayerCardContainer from '../containers/PlayerCardContainer.js'
 // debugger
     return (
       <div className="NavBar">
-        {/* <h3 className="navlink">Welcome {currentUser.username}</h3> */}
+        <h3 className="navlink">Welcome {currentUser.username}</h3>
           <div id="navi">
          <Link to={`/myplayercard`} id="playercard-link">View My Player Card </Link><span>    </span>
           <Link to={"/courts"} id="map-link">  Find Courts</Link>

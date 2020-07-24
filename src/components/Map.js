@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import mapStyles from "./mapStyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import useOnclickOutside from 'react-cool-onclickoutside';
-import { de } from 'date-fns/locale';
 
 
 const mapContainerStyle = {
@@ -146,7 +145,9 @@ export class CurrentLocation extends React.Component {
         position: place.geometry.location,
         title: place.name,
         placeId: place.place_id,
-        place_url : place.url
+        place_url : place.url,
+        player_ratings: place.user_ratings_total,
+        rating: place.rating
       });
 
       var infowindow = new this.props.google.maps.InfoWindow({
@@ -178,8 +179,11 @@ export class CurrentLocation extends React.Component {
       
       marker.addListener("click", function() {
         
-        let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>   
-                                <div>
+        let contentString = `<div id="infowindow">` + place.name + `<br>` + place.vicinity + `</div>
+                              <br>
+                              <div> `+ place.rating +` out of 5 stars</div> 
+                              <div> `+ place.user_ratings_total +` User Reviews</div> 
+                              <div>
                                 <p> <a id="courtpage" href=`+ place.url +` target="_blank" > View this court on Google </a> </p>
                               </div>
                             `
